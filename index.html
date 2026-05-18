@@ -858,6 +858,35 @@ footer {
   transform: translateY(0);
 }
 
+/* ─── COURSE LEVELS ─── */
+.course-levels {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 12px 0 14px;
+}
+.level-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.level-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid;
+  flex-shrink: 0;
+  letter-spacing: 0.5px;
+  margin-top: 1px;
+}
+.level-text {
+  font-size: 12px;
+  color: var(--dim);
+  line-height: 1.5;
+}
+
 /* ─── SCROLLBAR ─── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
@@ -973,7 +1002,7 @@ footer {
       <span class="stat-label">Exp. Required</span>
     </div>
     <div class="stat">
-      <span class="stat-val">05</span>
+      <span class="stat-val">08</span>
       <span class="stat-label">Courses Planned</span>
     </div>
   </div>
@@ -1021,14 +1050,34 @@ footer {
     <div class="course-row reveal">
       <div class="course-card" data-num="02">
         <div class="course-card-accent" style="background:rgba(74,158,255,0.6);"></div>
-        <h3>STM32: Bare Metal Mastery</h3>
-        <p>Ditch HAL. Own the registers. Pure C on STM32 microcontrollers. The way firmware was meant to be written.</p>
+        <h3>STM32 Embedded Development</h3>
+        <p>Two levels — from register-level bare metal C all the way to FreeRTOS-based industrial firmware.</p>
+        <div class="course-levels">
+          <div class="level-row">
+            <span class="level-badge" style="background:rgba(74,158,255,0.12);border-color:rgba(74,158,255,0.3);color:#4a9eff;">L1</span>
+            <span class="level-text">Bare metal C · GPIO · Timers · UART · SPI · I2C · No HAL</span>
+          </div>
+          <div class="level-row">
+            <span class="level-badge" style="background:rgba(74,158,255,0.12);border-color:rgba(74,158,255,0.3);color:#4a9eff;">L2</span>
+            <span class="level-text">FreeRTOS · Tasks · Queues · Semaphores · Industrial firmware</span>
+          </div>
+        </div>
         <span class="badge-soon">COMING SOON</span>
       </div>
       <div class="course-card" data-num="03">
         <div class="course-card-accent" style="background:rgba(255,107,53,0.6);"></div>
-        <h3>FreeRTOS on ESP32</h3>
-        <p>Multitasking, queues, and real-time system design on ESP32. Think beyond the loop.</p>
+        <h3>ESP32 &amp; Advanced IoT</h3>
+        <p>Two levels — real-time multitasking up to full industrial IoT with cloud connectivity.</p>
+        <div class="course-levels">
+          <div class="level-row">
+            <span class="level-badge" style="background:rgba(255,107,53,0.12);border-color:rgba(255,107,53,0.3);color:#ff6b35;">L1</span>
+            <span class="level-text">FreeRTOS · Multitasking · WiFi · BLE basics · OTA updates</span>
+          </div>
+          <div class="level-row">
+            <span class="level-badge" style="background:rgba(255,107,53,0.12);border-color:rgba(255,107,53,0.3);color:#ff6b35;">L2</span>
+            <span class="level-text">MQTT · IIoT protocols · Cloud connectivity · Node-RED</span>
+          </div>
+        </div>
         <span class="badge-soon">COMING SOON</span>
       </div>
     </div>
@@ -1036,21 +1085,31 @@ footer {
     <!-- Course 4 + 5 -->
     <div class="course-row reveal">
       <div class="course-card" data-num="04">
-        <div class="course-card-accent" style="background:rgba(0,229,160,0.4);"></div>
-        <h3>PCB Design</h3>
-        <p>From schematic capture to your own manufactured board. Build hardware that's ready to ship.</p>
+        <div class="course-card-accent" style="background:rgba(167,139,250,0.6);"></div>
+        <h3>nRF52 &amp; Bluetooth Low Energy</h3>
+        <p>BLE from the ground up — advertising, GATT, services &amp; characteristics, bonding, long range, and mesh networking.</p>
         <span class="badge-soon">COMING SOON</span>
       </div>
       <div class="course-card" data-num="05">
-        <div class="course-card-accent" style="background:rgba(167,139,250,0.5);"></div>
-        <h3>Mechatronics &amp; Robotics</h3>
-        <p>Motors, sensors, and control systems. Where software, electronics, and mechanics converge.</p>
+        <div class="course-card-accent" style="background:rgba(0,229,160,0.4);"></div>
+        <h3>PCB Design</h3>
+        <p>Two levels — from your first schematic to manufacturing-ready multi-layer boards with online ordering guidance.</p>
+        <div class="course-levels">
+          <div class="level-row">
+            <span class="level-badge" style="background:rgba(0,229,160,0.1);border-color:rgba(0,229,160,0.25);color:#00e5a0;">L1</span>
+            <span class="level-text">Schematic · Single-layer · Component selection · DRC</span>
+          </div>
+          <div class="level-row">
+            <span class="level-badge" style="background:rgba(0,229,160,0.1);border-color:rgba(0,229,160,0.25);color:#00e5a0;">L2</span>
+            <span class="level-text">Multi-layer · High-speed design · Gerbers · JLCPCB/PCBWay ordering</span>
+          </div>
+        </div>
         <span class="badge-soon">COMING SOON</span>
       </div>
     </div>
 
     <p class="reveal" style="text-align:center; font-family:var(--mono); font-size:12px; color:var(--dim); padding-top:8px; letter-spacing:0.5px;">
-      ✦ &nbsp;Courses 2–5 unlock based on your votes &amp; community demand &nbsp;✦
+      ✦ &nbsp;Advanced track — Mechatronics, Embedded CV, Edge AI &amp; TinyML — announced as the community grows &nbsp;✦
     </p>
   </div>
 </section>
@@ -1178,10 +1237,31 @@ footer {
     </div>
     <div class="faq-item reveal">
       <button class="faq-q">
+        How much does the course cost?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Fees are kept nominal and accessible — we believe good embedded systems training shouldn't be out of reach for Pakistani students. The exact fee will be announced when registration officially opens. Early bird registrants get 30% off, guaranteed. Register now to lock in your discount before the price is revealed.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">
+        Is this course in Urdu or English?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">The course is delivered in a mix of Urdu and English — teaching and explanations in Urdu, technical terms and code in English. This keeps it fully accessible without compromising the technical depth you need to actually work in the field.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">
         What hardware do I need?
         <span class="faq-icon">+</span>
       </button>
-      <div class="faq-a">An Arduino board (Uno or Nano), an ESP8266 module (NodeMCU), and a basic component kit. Full hardware list will be shared with registered students before launch. Total cost is typically under Rs. 3,000 locally.</div>
+      <div class="faq-a">An Arduino board (Uno or Nano), an ESP8266 module (NodeMCU), and a basic component kit. The full hardware list will be shared with registered students before launch. Total cost is typically under Rs. 3,000 locally.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">
+        Do I get a certificate?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Yes. Students who complete the course receive a certificate of completion from Embeduino Labs. We're also working on project-based assessments so your certificate reflects real, demonstrable skills — not just attendance.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q">
@@ -1195,14 +1275,14 @@ footer {
         Will sessions be live or recorded?
         <span class="faq-icon">+</span>
       </button>
-      <div class="faq-a">Format details (live vs recorded, timing, platform) will be finalized based on early registrant preferences. When you register, you'll be asked about your preferred schedule. Your input shapes the delivery.</div>
+      <div class="faq-a">Format details (live vs recorded, timing, platform) will be finalized based on early registrant preferences. When you register, you'll be asked about your preferred schedule. Your input shapes how we deliver. All sessions will be recorded and available to enrolled students so you never fall behind.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q">
         What comes after the Arduino &amp; IoT Bootcamp?
         <span class="faq-icon">+</span>
       </button>
-      <div class="faq-a">The community votes on what's built next: STM32 Bare Metal Mastery, FreeRTOS on ESP32, PCB Design, or Mechatronics &amp; Robotics. Follow our social accounts to vote and stay updated.</div>
+      <div class="faq-a">Phase 2 introduces more advanced courses — STM32 Embedded Development, ESP32 &amp; Advanced IoT, nRF52 &amp; BLE, PCB Design, and more. We also plan free workshops and community sessions based on what you vote for. Join our WhatsApp community and follow us on social media to have your say in what gets built next.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q">
@@ -1235,10 +1315,10 @@ footer {
         <h4>COURSES</h4>
         <ul>
           <li><a href="https://tinyurl.com/3n3yfbe3" target="_blank">Arduino &amp; IoT Bootcamp →</a></li>
-          <li><a href="#courses">STM32: Bare Metal (Soon)</a></li>
-          <li><a href="#courses">FreeRTOS on ESP32 (Soon)</a></li>
+          <li><a href="#courses">STM32 Embedded Development (Soon)</a></li>
+          <li><a href="#courses">ESP32 &amp; Advanced IoT (Soon)</a></li>
+          <li><a href="#courses">nRF52 &amp; BLE (Soon)</a></li>
           <li><a href="#courses">PCB Design (Soon)</a></li>
-          <li><a href="#courses">Mechatronics (Soon)</a></li>
         </ul>
       </div>
       <div class="footer-links">
@@ -1261,7 +1341,7 @@ footer {
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">© 2025 Embeduino Labs — @embeduinolabs — All rights reserved</span>
+      <span class="footer-copy">© 2026 Embeduino Labs — @embeduinolabs — All rights reserved</span>
       <div class="footer-social">
         <a href="https://www.instagram.com/embeduinolabs/" target="_blank" title="Instagram">📸</a>
         <a href="https://www.linkedin.com/in/embeduinolabs/" target="_blank" title="LinkedIn">💼</a>
