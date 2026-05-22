@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -887,6 +887,8 @@ footer {
   line-height: 1.5;
 }
 
+.course-featured:nth-child(2)::after { content: '02'; }
+
 /* ─── SCROLLBAR ─── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
@@ -927,12 +929,12 @@ footer {
     <li><a href="#connect">CONNECT</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
-  <a href="https://tinyurl.com/3n3yfbe3" target="_blank" class="nav-cta">REGISTER NOW →</a>
+  <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="nav-cta">REGISTER NOW →</a>
 </nav>
 
 <!-- ─── HERO ─── -->
 <section class="hero">
-  <div class="hero-badge">● EARLY BIRD REGISTRATION OPEN</div>
+  <div class="hero-badge">● 2 COURSES — EARLY BIRD REGISTRATION OPEN</div>
 
   <h1>
     From Blink<br/>
@@ -944,7 +946,7 @@ footer {
     Just real hardware, real code, real skills.
   </p>
   <div class="hero-actions">
-    <a href="https://tinyurl.com/3n3yfbe3" target="_blank" class="btn-primary">
+    <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="btn-primary">
       🐦 REGISTER EARLY — GET 30% OFF
     </a>
     <a href="#courses" class="btn-secondary">VIEW COURSES →</a>
@@ -990,8 +992,8 @@ footer {
 
   <div class="hero-stats">
     <div class="stat">
-      <span class="stat-val">01</span>
-      <span class="stat-label">Course Live Now</span>
+      <span class="stat-val">02</span>
+      <span class="stat-label">Courses Live Now</span>
     </div>
     <div class="stat">
       <span class="stat-val">30%</span>
@@ -1019,28 +1021,61 @@ footer {
   </div>
 
   <div class="courses-grid">
-    <!-- Featured -->
+    <!-- Featured Course 1 -->
     <div class="course-featured reveal">
       <div class="course-info">
         <div class="course-badge-row">
-          <span class="badge-start">▶ STARTING POINT</span>
+          <span class="badge-start" style="background:var(--blue);">▶ STARTING POINT</span>
           <span class="badge-enrolling">● ENROLLING NOW</span>
         </div>
-        <h3>Arduino &amp; IoT Bootcamp</h3>
+        <h3>Embedded Systems &amp; IoT Bootcamp</h3>
         <p class="course-desc">
-          Zero to embedded. C fundamentals the right way, Arduino beyond copy-paste,
+          Fundamentals Track. Zero to embedded — C fundamentals the right way, Arduino beyond copy-paste,
           ESP8266 wireless projects, and real IoT builds. No prior experience needed.
+          Starts <strong style="color:var(--blue)">13 June</strong> · 4 Weeks · Online · Weekends.
+          <span style="color:var(--orange); font-family:var(--mono); font-size:13px;">PKR&nbsp;<s style="opacity:0.5">5,000</s> → PKR&nbsp;3,500</span>
         </p>
         <div class="course-tags">
-          <span class="tag">BEGINNER FRIENDLY</span>
-          <span class="tag">HANDS-ON</span>
-          <span class="tag">NO EXP. REQ.</span>
-          <span class="tag">C PROGRAMMING</span>
-          <span class="tag">ESP8266</span>
+          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">BEGINNER FRIENDLY</span>
+          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">HANDS-ON</span>
+          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">NO EXP. REQ.</span>
+          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">C PROGRAMMING</span>
+          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">ESP8266</span>
+          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">WEEKENDS</span>
         </div>
       </div>
       <div class="course-cta-col">
-        <a href="https://tinyurl.com/3n3yfbe3" target="_blank" class="btn-primary" style="white-space:nowrap;">
+        <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="btn-primary" style="white-space:nowrap; background:var(--blue); box-shadow:0 0 24px rgba(74,158,255,0.25);">
+          REGISTER NOW →
+        </a>
+      </div>
+    </div>
+
+    <!-- Featured Course 2 -->
+    <div class="course-featured reveal">
+      <div class="course-info">
+        <div class="course-badge-row">
+          <span class="badge-start" style="background:var(--blue);">▶ ALSO LAUNCHING</span>
+          <span class="badge-enrolling">● ENROLLING NOW</span>
+        </div>
+        <h3>Professional PCB Design Bootcamp</h3>
+        <p class="course-desc">
+          Level 1 · KiCad &amp; EasyEDA. From your first schematic to ordering a real board — 1 &amp; 2 layer PCB layout,
+          Gerbers, and JLCPCB ordering. Beginner friendly, no prior experience needed.
+          Starts <strong style="color:var(--blue)">13 June</strong> · 4 Weeks · Online · Weekends.
+          <span style="color:var(--orange); font-family:var(--mono); font-size:13px;">PKR&nbsp;<s style="opacity:0.5">5,000</s> → PKR&nbsp;3,500</span>
+        </p>
+        <div class="course-tags">
+          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">BEGINNER FRIENDLY</span>
+          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">HANDS-ON</span>
+          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">KICAD</span>
+          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">EASYEDA</span>
+          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">REAL BOARDS</span>
+          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">WEEKENDS</span>
+        </div>
+      </div>
+      <div class="course-cta-col">
+        <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="btn-primary" style="white-space:nowrap; background:var(--blue); box-shadow:0 0 24px rgba(74,158,255,0.25);">
           REGISTER NOW →
         </a>
       </div>
@@ -1092,19 +1127,19 @@ footer {
       </div>
       <div class="course-card" data-num="05">
         <div class="course-card-accent" style="background:rgba(0,229,160,0.4);"></div>
-        <h3>PCB Design</h3>
+        <h3 style="color:var(--text);">PCB Design</h3>
         <p>Two levels — from your first schematic to manufacturing-ready multi-layer boards with online ordering guidance.</p>
         <div class="course-levels">
           <div class="level-row">
             <span class="level-badge" style="background:rgba(0,229,160,0.1);border-color:rgba(0,229,160,0.25);color:#00e5a0;">L1</span>
-            <span class="level-text">Schematic · Single-layer · Component selection · DRC</span>
+            <span class="level-text">Schematic · Double-layer · Component selection · DRC</span>
           </div>
           <div class="level-row">
             <span class="level-badge" style="background:rgba(0,229,160,0.1);border-color:rgba(0,229,160,0.25);color:#00e5a0;">L2</span>
-            <span class="level-text">Multi-layer · High-speed design · Gerbers · JLCPCB/PCBWay ordering</span>
+            <span class="level-text">Multi-layer · High-speed design · HDI, SI & PI · Design for manufacturing</span>
           </div>
         </div>
-        <span class="badge-soon">COMING SOON</span>
+        <span class="badge-start" style="font-size:9px; padding:4px 12px;">▶ L1 ENROLLING NOW</span>
       </div>
     </div>
 
@@ -1119,28 +1154,43 @@ footer {
 <!-- ─── EARLY BIRD ─── -->
 <section class="early-bird" id="early-bird">
   <div class="section-header reveal">
-    <div class="section-tag">LIMITED TIME</div>
+    <div class="section-tag">REGISTRATIONS OPEN</div>
     <h2>Early Bird <span class="accent">Special</span></h2>
-    <p>Register before we officially launch. Your discount is locked in — no payment now.</p>
+    <p>Both courses are open now. Register and confirm with payment to lock your seat at 30% off.</p>
   </div>
 
-  <div class="eb-card reveal">
+  <div class="eb-card reveal" style="align-items:flex-start; gap:48px;">
     <div class="eb-left">
-      <div class="eb-badge">🐦 EARLY BIRD SPECIAL</div>
+      <div class="eb-badge">🐦 EARLY BIRD — LIMITED SEATS</div>
       <div class="eb-discount">30%</div>
-      <h3>OFF the course price</h3>
-      <p>Register via Google Form before launch and lock in your early bird rate. No payment required at registration — we confirm your spot first.</p>
+      <h3>OFF — both courses</h3>
+      <p>Registrations are open now. Submit the form and complete payment to confirm your seat. Early bird pricing applies while spots last.</p>
     </div>
-    <div class="eb-right">
-      <ul class="eb-list">
-        <li>Full Arduino &amp; IoT Bootcamp access</li>
-        <li>C fundamentals + ESP8266 + IoT projects</li>
-        <li>Early bird cohort — direct founder access</li>
-        <li>No payment at registration</li>
-        <li>Discount guaranteed — locked in</li>
-      </ul>
-      <a href="https://tinyurl.com/3n3yfbe3" target="_blank" class="btn-primary" style="width:100%; justify-content:center;">
-        REGISTER NOW — FREE →
+    <div class="eb-right" style="min-width:320px;">
+      <!-- Course 1 block -->
+      <div style="margin-bottom:16px; padding:16px 20px; background:rgba(0,229,160,0.05); border:1px solid rgba(0,229,160,0.2); border-radius:10px;">
+        <div style="font-family:var(--mono); font-size:11px; color:var(--green); letter-spacing:1.5px; margin-bottom:10px;">COURSE 01 — ENROLLING NOW</div>
+        <div style="font-family:var(--mono); font-weight:700; font-size:14px; margin-bottom:6px;">Embedded Systems &amp; IoT Bootcamp</div>
+        <ul class="eb-list" style="margin-bottom:8px;">
+          <li>Arduino &amp; Embedded C · Digital &amp; Analog I/O</li>
+          <li>UART · I²C · SPI · ESP8266 &amp; WiFi</li>
+          <li>IoT Platforms &amp; Real Project Builds</li>
+          <li style="font-family:var(--mono); color:var(--orange);">PKR <s style="opacity:0.5;">5,000</s> → <strong>3,500</strong> &nbsp;·&nbsp; Starts 13 June</li>
+        </ul>
+      </div>
+      <!-- Course 2 block -->
+      <div style="margin-bottom:20px; padding:16px 20px; background:rgba(74,158,255,0.05); border:1px solid rgba(74,158,255,0.2); border-radius:10px;">
+        <div style="font-family:var(--mono); font-size:11px; color:var(--blue); letter-spacing:1.5px; margin-bottom:10px;">COURSE 02 — ENROLLING NOW</div>
+        <div style="font-family:var(--mono); font-weight:700; font-size:14px; margin-bottom:6px;">Professional PCB Design Bootcamp — L1</div>
+        <ul class="eb-list" style="margin-bottom:8px;">
+          <li>KiCad &amp; EasyEDA · Schematic Design &amp; DRC</li>
+          <li>PCB Layout &amp; Routing · 1 &amp; 2 Layer Boards</li>
+          <li>Gerbers &amp; JLCPCB Ordering — Real Boards</li>
+          <li style="font-family:var(--mono); color:var(--orange);">PKR <s style="opacity:0.5;">5,000</s> → <strong>3,500</strong> &nbsp;·&nbsp; Starts 13 June</li>
+        </ul>
+      </div>
+      <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="btn-primary" style="width:100%; justify-content:center;">
+        REGISTER &amp; CONFIRM SEAT →
       </a>
     </div>
   </div>
@@ -1160,20 +1210,20 @@ footer {
     <div class="how-step reveal">
       <span class="step-num">STEP 01</span>
       <span class="step-icon">📋</span>
-      <h3>Register Your Spot</h3>
-      <p>Fill out our short Google Form. No payment needed. Takes 2 minutes. Your early bird discount is locked the moment you submit.</p>
+      <h3>Choose Your Course(s)</h3>
+      <p>Pick the Embedded Systems &amp; IoT Bootcamp, the PCB Design Bootcamp, or both. Fill out the short Google Form — takes 2 minutes.</p>
     </div>
     <div class="how-step reveal" style="transition-delay:0.1s;">
       <span class="step-num">STEP 02</span>
-      <span class="step-icon">📩</span>
-      <h3>We Reach Out</h3>
-      <p>Before launch, we send you full course details, schedule, and payment instructions — with your 30% discount already applied.</p>
+      <span class="step-icon">💳</span>
+      <h3>Confirm With Payment</h3>
+      <p>Complete your payment at the early bird rate — PKR 3,500 per course — to lock your seat. Spots are limited and filled on a first-come, first-served basis.</p>
     </div>
     <div class="how-step reveal" style="transition-delay:0.2s;">
       <span class="step-num">STEP 03</span>
       <span class="step-icon">⚡</span>
       <h3>Build Real Things</h3>
-      <p>When the course goes live, you join the founding cohort. C from scratch, Arduino the right way, ESP8266 IoT projects — hands-on from day one.</p>
+      <p>Both courses start 13 June. Join the founding cohort — Arduino, C, ESP8266 IoT projects, and PCB design from schematic to real board, all hands-on from day one.</p>
     </div>
   </div>
 </section>
@@ -1196,7 +1246,7 @@ footer {
         <span class="social-handle">@embeduinolabs</span>
         <span class="social-action">FOLLOW →</span>
       </a>
-      <a href="https://www.linkedin.com/company/embeduino-labs/" target="_blank" class="social-card linkedin reveal" style="transition-delay:0.1s;">
+      <a href="https://www.linkedin.com/company/embeduinolabs/" target="_blank" class="social-card linkedin reveal" style="transition-delay:0.1s;">
         <div class="social-icon li">💼</div>
         <span class="social-name">LinkedIn</span>
         <span class="social-handle">@embeduinolabs</span>
@@ -1230,17 +1280,17 @@ footer {
   <div class="faq-inner">
     <div class="faq-item reveal">
       <button class="faq-q">
-        Do I need any prior experience to join the Arduino &amp; IoT Bootcamp?
+        Do I need any prior experience to join?
         <span class="faq-icon">+</span>
       </button>
-      <div class="faq-a">No. Absolutely none. We start from C programming fundamentals and build up from there. If you've never written a line of code or touched a circuit board — this is exactly where you start.</div>
+      <div class="faq-a">No. Absolutely none. Both the Embedded Systems &amp; IoT Bootcamp and the PCB Design Bootcamp are built for complete beginners. The IoT Bootcamp starts from C programming fundamentals. The PCB Design Bootcamp starts from zero — no prior electronics or CAD experience needed.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q">
         How much does the course cost?
         <span class="faq-icon">+</span>
       </button>
-      <div class="faq-a">Fees are kept nominal and accessible — we believe good embedded systems training shouldn't be out of reach for Pakistani students. The exact fee will be announced when registration officially opens. Early bird registrants get 30% off, guaranteed. Register now to lock in your discount before the price is revealed.</div>
+      <div class="faq-a">Both courses are priced at PKR 5,000 each. Early bird registrants get 30% off, bringing it to PKR 3,500 per course. Register via the Google Form and complete payment to lock your seat — first come, first served.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q">
@@ -1268,7 +1318,7 @@ footer {
         Is the early bird discount real? How does it work?
         <span class="faq-icon">+</span>
       </button>
-      <div class="faq-a">Yes — 30% off, guaranteed. Register via the Google Form now (no payment). We will contact you before launch with full details and apply the discount when you pay. First come, first served — limited spots.</div>
+      <div class="faq-a">Yes — 30% off, guaranteed. Register via the Google Form now before 29th May to avail early bird discount. First come, first served — limited spots.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q">
@@ -1282,7 +1332,7 @@ footer {
         What comes after the Arduino &amp; IoT Bootcamp?
         <span class="faq-icon">+</span>
       </button>
-      <div class="faq-a">Phase 2 introduces more advanced courses — STM32 Embedded Development, ESP32 &amp; Advanced IoT, nRF52 &amp; BLE, PCB Design, and more. We also plan free workshops and community sessions based on what you vote for. Join our WhatsApp community and follow us on social media to have your say in what gets built next.</div>
+      <div class="faq-a">Both courses run simultaneously starting 13 June — you can take one or both. After completing the IoT Bootcamp, Phase 2 introduces STM32 Embedded Development, ESP32 &amp; Advanced IoT, nRF52 &amp; BLE, and PCB Design Level 2. We also plan free workshops and community sessions. Join our WhatsApp community and follow us on social media to have your say in what gets built next.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q">
@@ -1297,9 +1347,9 @@ footer {
 <!-- ─── FINAL CTA ─── -->
 <section class="final-cta">
   <h2 class="reveal">Ready to <span class="accent">build</span><br/>real things?</h2>
-  <p class="reveal">Register now and lock in your early bird spot. No payment needed — just your seat at the table.</p>
-  <a href="https://tinyurl.com/3n3yfbe3" target="_blank" class="btn-primary reveal">
-    🐦 REGISTER EARLY — 30% OFF →
+  <p class="reveal">Both courses start 13 June. Register now and confirm your seat at the early bird rate — PKR 3,500 per course. Limited spots.</p>
+  <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="btn-primary reveal">
+    🐦 REGISTER NOW — 30% OFF →
   </a>
 </section>
 
@@ -1314,18 +1364,18 @@ footer {
       <div class="footer-links">
         <h4>COURSES</h4>
         <ul>
-          <li><a href="https://tinyurl.com/3n3yfbe3" target="_blank">Arduino &amp; IoT Bootcamp →</a></li>
+          <li><a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank">Embedded Systems &amp; IoT Bootcamp →</a></li>
+          <li><a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank">PCB Design Bootcamp — L1 →</a></li>
           <li><a href="#courses">STM32 Embedded Development (Soon)</a></li>
           <li><a href="#courses">ESP32 &amp; Advanced IoT (Soon)</a></li>
           <li><a href="#courses">nRF52 &amp; BLE (Soon)</a></li>
-          <li><a href="#courses">PCB Design (Soon)</a></li>
         </ul>
       </div>
       <div class="footer-links">
         <h4>CONNECT</h4>
         <ul>
           <li><a href="https://www.instagram.com/embeduinolabs/" target="_blank">Instagram</a></li>
-          <li><a href="https://www.linkedin.com/company/embeduino-labs/" target="_blank">LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/company/embeduinolabs/" target="_blank">LinkedIn</a></li>
           <li><a href="https://www.facebook.com/profile.php?id=61589578627851" target="_blank">Facebook</a></li>
           <li><a href="https://chat.whatsapp.com/IXVrEwwqq3DG2ZBWdb0F39" target="_blank">WhatsApp Community</a></li>
         </ul>
@@ -1336,7 +1386,7 @@ footer {
           <li><a href="#courses">Course Roadmap</a></li>
           <li><a href="#early-bird">Early Bird Offer</a></li>
           <li><a href="#faq">FAQ</a></li>
-          <li><a href="https://tinyurl.com/3n3yfbe3" target="_blank">Register Now</a></li>
+          <li><a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank">Register Now</a></li>
         </ul>
       </div>
     </div>
@@ -1344,7 +1394,7 @@ footer {
       <span class="footer-copy">© 2026 Embeduino Labs — @embeduinolabs — All rights reserved</span>
       <div class="footer-social">
         <a href="https://www.instagram.com/embeduinolabs/" target="_blank" title="Instagram">📸</a>
-        <a href="https://www.linkedin.com/company/embeduino-labs/" target="_blank" title="LinkedIn">💼</a>
+        <a href="https://www.linkedin.com/company/embeduinolabs/" target="_blank" title="LinkedIn">💼</a>
         <a href="https://www.facebook.com/profile.php?id=61589578627851" target="_blank" title="Facebook">📘</a>
         <a href="https://chat.whatsapp.com/IXVrEwwqq3DG2ZBWdb0F39" target="_blank" title="WhatsApp">💬</a>
       </div>
