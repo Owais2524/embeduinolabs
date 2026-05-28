@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Embeduino Labs — From Blink to Bare Metal</title>
+<title>Embeduino Labs</title>
 <meta name="description" content="Pakistan's most practical embedded systems academy. Arduino · STM32 · FreeRTOS · PCB Design. Start from zero. Build real things."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -342,16 +342,18 @@ section { position: relative; z-index: 1; }
   gap: 32px;
   position: relative;
   overflow: hidden;
-  transition: box-shadow 0.3s;
+  transition: box-shadow 0.3s, transform 0.25s, border-color 0.25s;
+  text-decoration: none;
 }
 .course-featured:hover {
-  box-shadow: 0 0 60px rgba(0,229,160,0.12);
+  box-shadow: 0 8px 48px rgba(0,229,160,0.18);
+  transform: translateY(-5px);
 }
 .course-featured::before {
   content:'';
   position:absolute; left:0; top:0; bottom:0;
   width: 5px;
-  background: var(--green);
+  background: var(--blue);
   border-radius: 3px 0 0 3px;
 }
 .course-featured::after {
@@ -362,7 +364,7 @@ section { position: relative; z-index: 1; }
   font-family: var(--mono);
   font-weight: 700;
   font-size: 90px;
-  color: rgba(0,229,160,0.06);
+  color: rgba(74,158,255,0.06);
   line-height: 1;
   pointer-events: none;
 }
@@ -601,141 +603,6 @@ section { position: relative; z-index: 1; }
   line-height: 1.6;
 }
 
-/* ─── SOCIAL / CONNECT ─── */
-.connect {
-  padding: 0 24px 96px;
-}
-.connect-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-.social-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-.social-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 14px;
-  padding: 36px 24px;
-  background: rgba(255,255,255,0.02);
-  border: 1px solid var(--border2);
-  border-radius: 14px;
-  text-decoration: none;
-  color: var(--text);
-  transition: border-color 0.2s, background 0.2s, transform 0.2s;
-  position: relative;
-  overflow: hidden;
-}
-.social-card:hover {
-  transform: translateY(-5px);
-}
-.social-card::before {
-  content:'';
-  position: absolute; top:0; left:0; right:0;
-  height: 2px;
-  border-radius: 2px 2px 0 0;
-  transition: opacity 0.2s;
-  opacity: 0;
-}
-.social-card:hover::before { opacity: 1; }
-.social-card.instagram::before { background: linear-gradient(90deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-.social-card.linkedin::before  { background: #0077B5; }
-.social-card.facebook::before  { background: #1877F2; }
-.social-card.whatsapp::before  { background: #25D366; }
-
-.social-card:hover.instagram { border-color: rgba(220,39,67,0.35); background: rgba(220,39,67,0.04); }
-.social-card:hover.linkedin  { border-color: rgba(0,119,181,0.35); background: rgba(0,119,181,0.04); }
-.social-card:hover.facebook  { border-color: rgba(24,119,242,0.35); background: rgba(24,119,242,0.04); }
-.social-card:hover.whatsapp  { border-color: rgba(37,211,102,0.35); background: rgba(37,211,102,0.04); }
-
-.social-icon {
-  width: 52px; height: 52px;
-  border-radius: 14px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 26px;
-}
-.social-icon.ig  { background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-.social-icon.li  { background: #0077B5; }
-.social-icon.fb  { background: #1877F2; }
-.social-icon.wa  { background: #25D366; }
-.social-name {
-  font-family: var(--mono);
-  font-weight: 700;
-  font-size: 14px;
-}
-.social-handle {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--dim);
-  letter-spacing: 0.5px;
-}
-.social-action {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 1.5px;
-  padding: 6px 16px;
-  border-radius: 4px;
-  border: 1px solid var(--border2);
-  color: var(--muted);
-  margin-top: 4px;
-  transition: color 0.2s, border-color 0.2s;
-}
-.social-card:hover .social-action {
-  color: var(--text);
-  border-color: rgba(255,255,255,0.2);
-}
-
-/* ─── FAQ ─── */
-.faq {
-  padding: 0 24px 96px;
-}
-.faq-inner {
-  max-width: 720px;
-  margin: 0 auto;
-}
-.faq-item {
-  border-bottom: 1px solid var(--border2);
-}
-.faq-q {
-  width: 100%;
-  background: none;
-  border: none;
-  color: var(--text);
-  font-family: var(--mono);
-  font-size: 14px;
-  text-align: left;
-  padding: 22px 0;
-  cursor: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  transition: color 0.2s;
-}
-.faq-q:hover { color: var(--green); }
-.faq-icon {
-  font-size: 18px;
-  flex-shrink: 0;
-  transition: transform 0.3s;
-  color: var(--green);
-}
-.faq-item.open .faq-icon { transform: rotate(45deg); }
-.faq-a {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.7;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.3s;
-}
-.faq-item.open .faq-a {
-  max-height: 300px;
-  padding-bottom: 22px;
-}
 
 /* ─── FINAL CTA ─── */
 .final-cta {
@@ -887,7 +754,91 @@ footer {
   line-height: 1.5;
 }
 
-.course-featured:nth-child(2)::after { content: '02'; }
+.course-featured:nth-child(2)::after { content: '02'; color: rgba(0,229,160,0.06); }
+
+/* Phase 2 full-width featured style */
+.course-phase2 {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  padding: 40px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s, border-color 0.3s, transform 0.25s;
+}
+.course-phase2:hover { border-color: rgba(0,229,160,0.25); transform: translateY(-4px); box-shadow: 0 8px 40px rgba(0,229,160,0.08); }
+.course-phase2::before {
+  content:'';
+  position:absolute; left:0; top:0; bottom:0;
+  width: 4px;
+  border-radius: 3px 0 0 3px;
+}
+.course-phase2::after {
+  position: absolute;
+  right: 48px; top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 90px;
+  color: rgba(255,255,255,0.025);
+  line-height: 1;
+  pointer-events: none;
+}
+.course-phase2 .course-info { flex: 1; }
+.course-phase2 h3 {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 22px;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+.course-phase2 .prereq {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--dim);
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+.course-phase2 .course-desc {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+.course-phase2 .course-cta-col { flex-shrink: 0; }
+
+/* Coming soon small cards */
+.course-soon-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* ─── AMBASSADOR BANNER ─── */
+.amb-banner {
+  background: rgba(255,107,53,0.05);
+  border: 1px solid rgba(255,107,53,0.25);
+  border-radius: 16px;
+  padding: 40px 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, background 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.amb-banner:hover {
+  border-color: rgba(255,107,53,0.5);
+  background: rgba(255,107,53,0.09);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 48px rgba(255,107,53,0.12);
+}
 
 /* ─── SCROLLBAR ─── */
 ::-webkit-scrollbar { width: 5px; }
@@ -903,6 +854,10 @@ footer {
   .course-featured { flex-direction: column; padding: 32px 28px; }
   .course-featured::after { display: none; }
   .course-row { grid-template-columns: 1fr; }
+  .course-card { width: 100%; box-sizing: border-box; }
+  .course-phase2 { flex-direction: column; padding: 28px 24px; }
+  .course-phase2::after { display: none; }
+  .course-soon-row { grid-template-columns: 1fr; }
   .eb-card { flex-direction: column; padding: 24px 20px; gap: 32px; }
   .eb-right { width: 100%; box-sizing: border-box; }
   .eb-right > div { box-sizing: border-box; width: 100%; padding: 14px 14px !important; }
@@ -927,17 +882,18 @@ footer {
 <nav>
   <a href="#" class="nav-logo">Embed<span>uino</span> Labs</a>
   <ul class="nav-links">
-    <li><a href="#courses">COURSES</a></li>
-    <li><a href="#early-bird">EARLY BIRD</a></li>
-    <li><a href="#connect">CONNECT</a></li>
-    <li><a href="#faq">FAQ</a></li>
+    <li><a href="courses.html">COURSES</a></li>
+    <li><a href="team.html">TEAM</a></li>
+    <li><a href="ambassador.html">CAMPUS AMBASSADOR</a></li>
+    <li><a href="contact.html">CONTACT</a></li>
+    <li><a href="faq.html">FAQ</a></li>
   </ul>
   <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="nav-cta">REGISTER NOW →</a>
 </nav>
 
 <!-- ─── HERO ─── -->
 <section class="hero">
-  <div class="hero-badge">● 2 COURSES — EARLY BIRD REGISTRATION OPEN</div>
+  <div class="hero-badge">REGISTRATIONS OPEN</div>
 
   <h1>
     From Blink<br/>
@@ -945,7 +901,7 @@ footer {
   </h1>
   <p class="hero-sub">
     Pakistan's most practical embedded systems academy.
-    Zero to IoT, Arduino to STM32 — no copy-paste, no shortcuts.
+    Zero to IoT, Arduino to STM32, no copy-paste, no shortcuts.
     Just real hardware, real code, real skills.
   </p>
   <div class="hero-actions">
@@ -1015,140 +971,176 @@ footer {
 
 <div class="section-divider"></div>
 
+
+<!-- ─── PROMO BANNER ─── -->
+<section style="padding:0 24px 0;position:relative;z-index:1;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="amb-banner reveal" onclick="window.location='ambassador.html'" style="cursor:pointer;">
+      <!-- left accent bar -->
+      <div style="position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,var(--orange),rgba(255,107,53,0.3));border-radius:5px 0 0 5px;"></div>
+      <!-- diagonal bg accent -->
+      <div style="position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,107,53,0.07) 0%,rgba(255,107,53,0.03) 50%,transparent 100%);pointer-events:none;"></div>
+      <!-- rocket watermark -->
+      <div style="position:absolute;right:48px;top:50%;transform:translateY(-50%);font-size:96px;opacity:0.06;pointer-events:none;line-height:1;user-select:none;">🚀</div>
+      <!-- text -->
+      <div style="position:relative;z-index:1;">
+        <div style="font-family:var(--mono);font-size:11px;letter-spacing:3px;color:var(--orange);margin-bottom:12px;opacity:0.9;">🚀 CAMPUS AMBASSADOR PROGRAM</div>
+        <div style="font-family:var(--mono);font-weight:700;font-size:clamp(20px,3vw,30px);color:var(--text);margin-bottom:10px;line-height:1.2;">Represent at Your Campus.<br/>Applications Open.</div>
+        <div style="font-size:15px;color:var(--muted);font-weight:300;line-height:1.6;">Build community &nbsp;·&nbsp; Earn perks &nbsp;·&nbsp; Grow your professional profile</div>
+      </div>
+      <!-- CTA -->
+      <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-end;flex-shrink:0;position:relative;z-index:1;">
+        <a href="https://docs.google.com/forms/d/1dGoFIoc6D6GnOCrVKgK1EHheiPkcqqGfY4cH4ZOe-p8/" target="_blank" style="display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;font-weight:700;color:#fff;background:var(--orange);padding:16px 36px;border-radius:8px;text-decoration:none;letter-spacing:1px;box-shadow:0 0 28px rgba(255,107,53,0.3);white-space:nowrap;transition:transform 0.15s,box-shadow 0.2s;" onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 0 44px rgba(255,107,53,0.5)'" onmouseleave="this.style.transform='';this.style.boxShadow='0 0 28px rgba(255,107,53,0.3)'">APPLY NOW →</a>
+        <a href="ambassador.html" style="font-family:var(--mono);font-size:11px;color:rgba(255,107,53,0.6);text-decoration:none;letter-spacing:1px;transition:color 0.2s;" onmouseenter="this.style.color='rgba(255,107,53,0.9)'" onmouseleave="this.style.color='rgba(255,107,53,0.6)'">LEARN MORE →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="height:48px;"></div>
+
 <!-- ─── COURSES ─── -->
 <section class="courses" id="courses">
   <div class="section-header reveal">
     <div class="section-tag">COURSE ROADMAP</div>
     <h2>Your Embedded <span class="accent">Journey</span></h2>
-    <p>Everything we're building — in sequence. One solid foundation before the next level.</p>
+    <p>Everything we're building, in sequence. One solid foundation before the next level.</p>
   </div>
 
   <div class="courses-grid">
-    <!-- Featured Course 1 -->
-    <div class="course-featured reveal">
+
+    <!-- ── PHASE 1 LABEL ── -->
+    <div class="reveal" style="display:flex;align-items:center;gap:16px;margin:0 0 4px;">
+      <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(0,229,160,0.2));"></div>
+      <span style="font-family:var(--mono);font-size:11px;letter-spacing:3px;color:rgba(0,229,160,0.6);white-space:nowrap;">PHASE 1 — ENROLLING NOW</span>
+      <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(0,229,160,0.2),transparent);"></div>
+    </div>
+
+    <!-- COURSE 01 — Embedded Systems & IoT -->
+    <div class="course-featured reveal" id="c01-idx" style="border-color:rgba(74,158,255,0.7);background:rgba(74,158,255,0.07);cursor:pointer;" onclick="window.location='courses.html#c01'">
       <div class="course-info">
         <div class="course-badge-row">
-          <span class="badge-start" style="background:var(--blue);">▶ STARTING POINT</span>
-          <span class="badge-enrolling">● ENROLLING NOW</span>
+          <span class="badge-start" style="background:var(--blue);color:var(--bg);">● ENROLLING NOW</span>
+          <span class="badge-enrolling" style="font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--muted);">▶ STARTS 13 JUNE · 4 WEEKS · WEEKENDS</span>
         </div>
-        <h3>Embedded Systems &amp; IoT Bootcamp</h3>
-        <p class="course-desc">
-          Fundamentals Track. Zero to embedded — C fundamentals the right way, Arduino beyond copy-paste,
-          ESP8266 wireless projects, and real IoT builds. No prior experience needed.
-          Starts <strong style="color:var(--blue)">13 June</strong> · 4 Weeks · Online · Weekends.
-          <span style="color:var(--orange); font-family:var(--mono); font-size:13px;">PKR&nbsp;<s style="opacity:0.5">5,000</s> → PKR&nbsp;3,500</span>
-        </p>
+        <h3>Embedded Systems &amp; IoT Bootcamp  <span style="font-family:var(--mono);font-size:11px;font-weight:400;color:var(--blue);background:rgba(74,158,255,0.1);border:1px solid rgba(74,158,255,0.25);border-radius:4px;padding:2px 8px;vertical-align:middle;letter-spacing:1px;">Fundamentals Track</span></h3>
+        <p class="course-desc">Zero to embedded C, from scratch, Arduino the right way, ESP8266 wireless projects, and real IoT builds. Beginner friendly, no prior experience needed.<span style="color:var(--orange);font-family:var(--mono);font-size:13px;">&nbsp;PKR&nbsp;<s style="opacity:0.5">5,000</s> → 3,500</span></p>
+        <div class="course-levels" style="margin-bottom:16px;">
+          <div class="level-row">
+            <span class="level-badge" style="background:rgba(74,158,255,0.1);border-color:rgba(74,158,255,0.35);color:var(--blue);">01</span>
+            <span class="level-text">C Programming · Arduino · Sensors · PWM</span>
+          </div>
+          <div class="level-row">
+            <span class="level-badge" style="background:rgba(74,158,255,0.1);border-color:rgba(74,158,255,0.35);color:var(--blue);">02</span>
+            <span class="level-text">ESP8266 · WiFi · IoT Platforms · Real Projects</span>
+          </div>
+        </div>
         <div class="course-tags">
           <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">BEGINNER FRIENDLY</span>
           <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">HANDS-ON</span>
-          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">NO EXP. REQ.</span>
           <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">C PROGRAMMING</span>
           <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">ESP8266</span>
           <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">WEEKENDS</span>
         </div>
       </div>
       <div class="course-cta-col">
-        <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="btn-primary" style="white-space:nowrap; background:var(--blue); box-shadow:0 0 24px rgba(74,158,255,0.25);">
-          REGISTER NOW →
-        </a>
+        <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="btn-primary" style="white-space:nowrap;background:var(--blue);box-shadow:0 0 24px rgba(74,158,255,0.3);">REGISTER NOW →</a>
       </div>
     </div>
 
-    <!-- Featured Course 2 -->
-    <div class="course-featured reveal">
+    <!-- COURSE 02 — PCB Design L1 -->
+    <div class="course-featured reveal" id="c02-idx" style="border-color:rgba(0,229,160,0.8);background:rgba(0,229,160,0.07);cursor:pointer;" onclick="window.location='courses.html#c02'">
       <div class="course-info">
         <div class="course-badge-row">
-          <span class="badge-start" style="background:var(--blue);">▶ ALSO LAUNCHING</span>
-          <span class="badge-enrolling">● ENROLLING NOW</span>
+          <span class="badge-start" style="background:var(--green);color:var(--bg);">● ENROLLING NOW</span>
+          <span class="badge-enrolling" style="font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--muted);">▶ STARTS 13 JUNE · 4 WEEKS · WEEKENDS</span>
         </div>
-        <h3>Professional PCB Design Bootcamp</h3>
-        <p class="course-desc">
-          Level 1 · KiCad &amp; EasyEDA. From your first schematic to ordering a real board — 1 &amp; 2 layer PCB layout,
-          Gerbers, and JLCPCB ordering. Beginner friendly, no prior experience needed.
-          Starts <strong style="color:var(--blue)">13 June</strong> · 4 Weeks · Online · Weekends.
-          <span style="color:var(--orange); font-family:var(--mono); font-size:13px;">PKR&nbsp;<s style="opacity:0.5">5,000</s> → PKR&nbsp;3,500</span>
-        </p>
+        <h3>Professional PCB Design Bootcamp <span style="font-family:var(--mono);font-size:12px;font-weight:400;color:var(--green);background:rgba(74,158,255,0.1);border:1px solid rgba(74,158,255,0.3);border-radius:4px;padding:3px 9px;vertical-align:middle;letter-spacing:1px;">Level 1</span></h3>
+        <p class="course-desc">KiCad &amp; EasyEDA, from your first schematic to ordering a real board. 1 &amp; 2 layer layout, Gerbers, and JLCPCB ordering. No prior experience needed.<span style="color:var(--orange);font-family:var(--mono);font-size:13px;">&nbsp;PKR&nbsp;<s style="opacity:0.5">5,000</s> → 3,500</span></p>
+        <div class="course-levels" style="margin-bottom:16px;">
+          <div class="level-row">
+            <span class="level-badge" style="background:rgba(74,158,255,0.1);border-color:rgba(74,158,255,0.3);color:var(--green);">01</span>
+            <span class="level-text">KiCad &amp; EasyEDA · Schematic Design · Symbols &amp; Footprints · DRC</span>
+          </div>
+          <div class="level-row">
+            <span class="level-badge" style="background:rgba(74,158,255,0.1);border-color:rgba(74,158,255,0.3);color:var(--green);">02</span>
+            <span class="level-text">PCB Layout &amp; Routing · 1 &amp; 2 Layer · Gerbers · JLCPCB Ordering</span>
+          </div>
+        </div>
         <div class="course-tags">
-          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">BEGINNER FRIENDLY</span>
-          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">HANDS-ON</span>
-          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">KICAD</span>
-          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">EASYEDA</span>
-          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">REAL BOARDS</span>
-          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">WEEKENDS</span>
+          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--green);background:rgba(74,158,255,0.08);">BEGINNER FRIENDLY</span>
+          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--green);background:rgba(74,158,255,0.08);">KICAD</span>
+          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--green);background:rgba(74,158,255,0.08);">EASYEDA</span>
+          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--green);background:rgba(74,158,255,0.08);">REAL BOARDS</span>
+          <span class="tag" style="border-color:rgba(74,158,255,0.35);color:var(--green);background:rgba(74,158,255,0.08);">WEEKENDS</span>
         </div>
       </div>
       <div class="course-cta-col">
-        <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="btn-primary" style="white-space:nowrap; background:var(--blue); box-shadow:0 0 24px rgba(74,158,255,0.25);">
-          REGISTER NOW →
-        </a>
+        <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="btn-primary" style="white-space:nowrap;background:var(--green);box-shadow:0 0 24px rgba(0,229,160,0.3);">REGISTER NOW →</a>
       </div>
     </div>
 
-    <!-- Course 2 + 3 -->
-    <div class="course-row reveal">
-      <div class="course-card" data-num="02">
-        <div class="course-card-accent" style="background:rgba(74,158,255,0.6);"></div>
-        <h3>STM32 Embedded Development</h3>
-        <p>Two levels — from register-level bare metal C all the way to FreeRTOS-based industrial firmware.</p>
-        <div class="course-levels">
+    <!-- ── PHASE 2 LABEL ── -->
+    <div class="reveal" style="display:flex;align-items:center;gap:16px;margin:16px 0 4px;">
+      <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(0,229,160,0.15));"></div>
+      <span style="font-family:var(--mono);font-size:11px;letter-spacing:3px;color:rgba(0,229,160,0.45);white-space:nowrap;">PHASE 2 — STARTS JULY</span>
+      <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(0,229,160,0.15),transparent);"></div>
+    </div>
+
+    <!-- COURSE 03 — STM32 L1 -->
+    <div class="course-phase2 reveal" style="border-color:rgba(74,158,255,0.2);cursor:pointer;" onclick="window.location='courses.html#c03'">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:3px 0 0 3px;background:rgba(74,158,255,0.6);"></div>
+      <div style="position:absolute;right:48px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-weight:700;font-size:90px;color:rgba(255,255,255,0.025);pointer-events:none;line-height:1;">03</div>
+      <div class="course-info">
+        <div class="course-badge-row">
+          <span class="badge-start" style="background:rgba(74,158,255,0.15);color:var(--blue);border:1px solid rgba(74,158,255,0.3);">▶ STARTS JULY</span>
+          <span style="font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);">PRE-REQ: Arduino &amp; Embedded C</span>
+        </div>
+        <h3 style="font-family:var(--mono);font-weight:700;font-size:22px;margin-bottom:10px;color:var(--text);">STM32 Embedded Systems Development <span style="font-family:var(--mono);font-size:11px;font-weight:400;color:var(--blue);background:rgba(74,158,255,0.1);border:1px solid rgba(74,158,255,0.25);border-radius:4px;padding:2px 8px;vertical-align:middle;letter-spacing:1px;">Level 1</span></h3>
+        <p style="font-size:15px;color:var(--muted);margin-bottom:16px;line-height:1.6;">Embedded C on STM32, from clock trees and GPIO to DMA and protocols. Real hardware, real registers, no HAL shortcuts.</p>
+        <div class="course-levels" style="margin-bottom:16px;">
           <div class="level-row">
-            <span class="level-badge" style="background:rgba(74,158,255,0.12);border-color:rgba(74,158,255,0.3);color:#4a9eff;">L1</span>
-            <span class="level-text">Bare metal C · GPIO · Timers · UART · SPI · I2C · No HAL</span>
+            <span class="level-badge" style="background:rgba(74,158,255,0.12);border-color:rgba(74,158,255,0.3);color:var(--blue);">01</span>
+            <span class="level-text">GPIO · Clock trees · Timers · PWM · ADC · NVIC · Polling vs Interrupts</span>
           </div>
           <div class="level-row">
-            <span class="level-badge" style="background:rgba(74,158,255,0.12);border-color:rgba(74,158,255,0.3);color:#4a9eff;">L2</span>
-            <span class="level-text">FreeRTOS · Tasks · Queues · Semaphores · Industrial firmware</span>
+            <span class="level-badge" style="background:rgba(74,158,255,0.12);border-color:rgba(74,158,255,0.3);color:var(--blue);">02</span>
+            <span class="level-text">UART · I²C · SPI · DMA · Debugging · Real peripheral projects</span>
           </div>
         </div>
-        <span class="badge-soon">COMING SOON</span>
       </div>
-      <div class="course-card" data-num="03">
-        <div class="course-card-accent" style="background:rgba(255,107,53,0.6);"></div>
-        <h3>ESP32 &amp; Advanced IoT</h3>
-        <p>Two levels — real-time multitasking up to full industrial IoT with cloud connectivity.</p>
-        <div class="course-levels">
-          <div class="level-row">
-            <span class="level-badge" style="background:rgba(255,107,53,0.12);border-color:rgba(255,107,53,0.3);color:#ff6b35;">L1</span>
-            <span class="level-text">FreeRTOS · Multitasking · WiFi · BLE basics · OTA updates</span>
-          </div>
-          <div class="level-row">
-            <span class="level-badge" style="background:rgba(255,107,53,0.12);border-color:rgba(255,107,53,0.3);color:#ff6b35;">L2</span>
-            <span class="level-text">MQTT · IIoT protocols · Cloud connectivity · Node-RED</span>
-          </div>
-        </div>
-        <span class="badge-soon">COMING SOON</span>
+      <div class="course-cta-col">
+        <a href="https://docs.google.com/forms/d/1rU8_jEswz7tQQXnoqoOomgpeQsHD6aAXrk7GUtZ8Qbo/" target="_blank" class="btn-primary" style="white-space:nowrap;background:rgba(74,158,255,0.15);color:var(--blue);border:1px solid rgba(74,158,255,0.4);box-shadow:none;">JOIN WAITLIST →</a>
       </div>
     </div>
 
-    <!-- Course 4 + 5 -->
-    <div class="course-row reveal">
-      <div class="course-card" data-num="04">
-        <div class="course-card-accent" style="background:rgba(167,139,250,0.6);"></div>
-        <h3>nRF52 &amp; Bluetooth Low Energy</h3>
-        <p>BLE from the ground up — advertising, GATT, services &amp; characteristics, bonding, long range, and mesh networking.</p>
-        <span class="badge-soon">COMING SOON</span>
-      </div>
-      <div class="course-card" data-num="05">
-        <div class="course-card-accent" style="background:rgba(0,229,160,0.4);"></div>
-        <h3 style="color:var(--text);">PCB Design</h3>
-        <p>Two levels — from your first schematic to manufacturing-ready multi-layer boards with online ordering guidance.</p>
-        <div class="course-levels">
+    <!-- COURSE 04 — PCB Design L2 -->
+    <div class="course-phase2 reveal" style="border-color:rgba(0,229,160,0.15);cursor:pointer;" onclick="window.location='courses.html#c04'">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:3px 0 0 3px;background:rgba(0,229,160,0.5);"></div>
+      <div style="position:absolute;right:48px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-weight:700;font-size:90px;color:rgba(255,255,255,0.025);pointer-events:none;line-height:1;">04</div>
+      <div class="course-info">
+        <div class="course-badge-row">
+          <span class="badge-start" style="background:rgba(0,229,160,0.12);color:var(--green);border:1px solid rgba(0,229,160,0.3);">▶ STARTS JULY</span>
+          <span style="font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);">PRE-REQ: PCB Design L1</span>
+        </div>
+        <h3 style="font-family:var(--mono);font-weight:700;font-size:22px;margin-bottom:10px;color:var(--text);">Professional PCB Design Bootcamp <span style="font-family:var(--mono);font-size:11px;font-weight:400;color:var(--green);background:rgba(0,229,160,0.08);border:1px solid rgba(0,229,160,0.22);border-radius:4px;padding:2px 8px;vertical-align:middle;letter-spacing:1px;">Level 2</span></h3>
+        <p style="font-size:15px;color:var(--muted);margin-bottom:16px;line-height:1.6;">Advanced PCB engineering, multi-layer boards, signal integrity, and manufacturing-ready design for real industrial applications.</p>
+        <div class="course-levels" style="margin-bottom:16px;">
           <div class="level-row">
-            <span class="level-badge" style="background:rgba(0,229,160,0.1);border-color:rgba(0,229,160,0.25);color:#00e5a0;">L1</span>
-            <span class="level-text">Schematic · Double-layer · Component selection · DRC</span>
+            <span class="level-badge" style="background:rgba(0,229,160,0.1);border-color:rgba(0,229,160,0.25);color:var(--green);">01</span>
+            <span class="level-text">Multi-layer boards · High-speed design · Signal integrity · Impedance control</span>
           </div>
           <div class="level-row">
-            <span class="level-badge" style="background:rgba(0,229,160,0.1);border-color:rgba(0,229,160,0.25);color:#00e5a0;">L2</span>
-            <span class="level-text">Multi-layer · High-speed design · HDI, SI & PI · Design for manufacturing</span>
+            <span class="level-badge" style="background:rgba(0,229,160,0.1);border-color:rgba(0,229,160,0.25);color:var(--green);">02</span>
+            <span class="level-text">Power integrity · DFM · High-density layout · Manufacturing handoff</span>
           </div>
         </div>
-        <span class="badge-start" style="font-size:9px; padding:4px 12px;">▶ L1 ENROLLING NOW</span>
+      </div>
+      <div class="course-cta-col">
+        <a href="https://docs.google.com/forms/d/1rU8_jEswz7tQQXnoqoOomgpeQsHD6aAXrk7GUtZ8Qbo/" target="_blank" class="btn-primary" style="white-space:nowrap;background:rgba(0,229,160,0.1);color:var(--green);border:1px solid rgba(0,229,160,0.35);box-shadow:none;">JOIN WAITLIST →</a>
       </div>
     </div>
 
-    <p class="reveal" style="text-align:center; font-family:var(--mono); font-size:12px; color:var(--dim); padding-top:8px; letter-spacing:0.5px;">
-      ✦ &nbsp;Advanced track — Mechatronics, Embedded CV, Edge AI &amp; TinyML — announced as the community grows &nbsp;✦
-    </p>
   </div>
 </section>
 
@@ -1188,7 +1180,7 @@ footer {
         <ul class="eb-list" style="margin-bottom:8px;">
           <li>KiCad &amp; EasyEDA · Schematic Design &amp; DRC</li>
           <li>PCB Layout &amp; Routing · 1 &amp; 2 Layer Boards</li>
-          <li>Gerbers &amp; JLCPCB Ordering — Real Boards</li>
+          <li>Gerbers &amp; JLCPCB Ordering · Real Boards</li>
           <li style="font-family:var(--mono); color:var(--orange);">PKR&nbsp;<s style="white-space: nowrap;">5,000</s> → <strong style="white-space: nowrap;">3,500</strong> · Starts 13 June</li>
         </ul>
       </div>
@@ -1214,145 +1206,31 @@ footer {
       <span class="step-num">STEP 01</span>
       <span class="step-icon">📋</span>
       <h3>Choose Your Course(s)</h3>
-      <p>Pick the Embedded Systems &amp; IoT Bootcamp, the PCB Design Bootcamp, or both. Fill out the short Google Form — takes 2 minutes.</p>
+      <p>Pick the Embedded Systems &amp; IoT Bootcamp, the PCB Design Bootcamp, or both. Fill out the short Google Form takes 2 minutes.</p>
     </div>
     <div class="how-step reveal" style="transition-delay:0.1s;">
       <span class="step-num">STEP 02</span>
       <span class="step-icon">💳</span>
       <h3>Confirm With Payment</h3>
-      <p>Complete your payment at the early bird rate — PKR 3,500 per course — to lock your seat. Spots are limited and filled on a first-come, first-served basis.</p>
+      <p>Complete your payment at the early bird rate PKR 3,500 per course, to lock your seat. Spots are limited and filled on a first-come, first-served basis.</p>
     </div>
     <div class="how-step reveal" style="transition-delay:0.2s;">
       <span class="step-num">STEP 03</span>
       <span class="step-icon">⚡</span>
       <h3>Build Real Things</h3>
-      <p>Both courses start 13 June. Join the founding cohort — Arduino, C, ESP8266 IoT projects, and PCB design from schematic to real board, all hands-on from day one.</p>
+      <p>Both courses start 13 June. Join the founding cohort Arduino, C, ESP8266 IoT projects, and PCB design from schematic to real board, all hands-on from day one.</p>
     </div>
   </div>
 </section>
 
 <div class="section-divider"></div>
-
-<!-- ─── CONNECT ─── -->
-<section class="connect" id="connect">
-  <div class="section-header reveal">
-    <div class="section-tag">COMMUNITY</div>
-    <h2>Follow &amp; <span class="accent">Connect</span></h2>
-    <p>Updates, tips, and behind-the-scenes — across every platform.</p>
-  </div>
-
-  <div class="connect-inner">
-    <div class="social-grid">
-      <a href="https://www.instagram.com/embeduinolabs/" target="_blank" class="social-card instagram reveal">
-        <div class="social-icon ig">📸</div>
-        <span class="social-name">Instagram</span>
-        <span class="social-handle">@embeduinolabs</span>
-        <span class="social-action">FOLLOW →</span>
-      </a>
-      <a href="https://www.linkedin.com/company/embeduinolabs/" target="_blank" class="social-card linkedin reveal" style="transition-delay:0.1s;">
-        <div class="social-icon li">💼</div>
-        <span class="social-name">LinkedIn</span>
-        <span class="social-handle">@embeduinolabs</span>
-        <span class="social-action">CONNECT →</span>
-      </a>
-      <a href="https://www.facebook.com/profile.php?id=61589578627851" target="_blank" class="social-card facebook reveal" style="transition-delay:0.2s;">
-        <div class="social-icon fb">📘</div>
-        <span class="social-name">Facebook</span>
-        <span class="social-handle">Embeduino Labs</span>
-        <span class="social-action">LIKE PAGE →</span>
-      </a>
-      <a href="https://chat.whatsapp.com/IXVrEwwqq3DG2ZBWdb0F39" target="_blank" class="social-card whatsapp reveal" style="transition-delay:0.3s;">
-        <div class="social-icon wa">💬</div>
-        <span class="social-name">WhatsApp</span>
-        <span class="social-handle">Community</span>
-        <span class="social-action">JOIN →</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- ─── FAQ ─── -->
-<section class="faq" id="faq">
-  <div class="section-header reveal">
-    <div class="section-tag">FAQ</div>
-    <h2>Common <span class="accent">Questions</span></h2>
-  </div>
-
-  <div class="faq-inner">
-    <div class="faq-item reveal">
-      <button class="faq-q">
-        Do I need any prior experience to join?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">No. Absolutely none. Both the Embedded Systems &amp; IoT Bootcamp and the PCB Design Bootcamp are built for complete beginners. The IoT Bootcamp starts from C programming fundamentals. The PCB Design Bootcamp starts from zero — no prior electronics or CAD experience needed.</div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q">
-        How much does the course cost?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">Both courses are priced at PKR 5,000 each. Early bird registrants get 30% off, bringing it to PKR 3,500 per course. Register via the Google Form and complete payment to lock your seat — first come, first served.</div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q">
-        Is this course in Urdu or English?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">The course is delivered in a mix of Urdu and English — teaching and explanations in Urdu, technical terms and code in English. This keeps it fully accessible without compromising the technical depth you need to actually work in the field.</div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q">
-        What hardware do I need?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">An Arduino board (Uno or Nano), an ESP8266 module (NodeMCU), and a basic component kit. The full hardware list will be shared with registered students before launch. Total cost is typically under Rs. 3,000 locally.</div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q">
-        Do I get a certificate?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">Yes. Students who complete the course receive a certificate of completion from Embeduino Labs. We're also working on project-based assessments so your certificate reflects real, demonstrable skills — not just attendance.</div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q">
-        Is the early bird discount real? How does it work?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">Yes — 30% off, guaranteed. Register via the Google Form now before 29th May to avail early bird discount. First come, first served — limited spots.</div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q">
-        Will sessions be live or recorded?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">Format details (live vs recorded, timing, platform) will be finalized based on early registrant preferences. When you register, you'll be asked about your preferred schedule. Your input shapes how we deliver. All sessions will be recorded and available to enrolled students so you never fall behind.</div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q">
-        What comes after the Arduino &amp; IoT Bootcamp?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">Both courses run simultaneously starting 13 June — you can take one or both. After completing the IoT Bootcamp, Phase 2 introduces STM32 Embedded Development, ESP32 &amp; Advanced IoT, nRF52 &amp; BLE, and PCB Design Level 2. We also plan free workshops and community sessions. Join our WhatsApp community and follow us on social media to have your say in what gets built next.</div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q">
-        I'm a working professional, not a student — is this for me?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">Absolutely. The bootcamp is designed for anyone starting from zero — students, career switchers, hobbyists, or professionals expanding into embedded systems. If you want to build real hardware skills, you're in the right place.</div>
-    </div>
-  </div>
-</section>
 
 <!-- ─── FINAL CTA ─── -->
 <section class="final-cta">
   <h2 class="reveal">Ready to <span class="accent">build</span><br/>real things?</h2>
-  <p class="reveal">Both courses start 13 June. Register now and confirm your seat at the early bird rate — PKR 3,500 per course. Limited spots.</p>
+  <p class="reveal">Both courses start 13 June. Register now and confirm your seat. Limited spots.</p>
   <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="btn-primary reveal">
-    🐦 REGISTER NOW — 30% OFF →
+    🐦 REGISTER NOW →
   </a>
 </section>
 
@@ -1362,14 +1240,15 @@ footer {
     <div class="footer-top">
       <div class="footer-brand">
         <span class="footer-logo">Embed<span>uino</span> Labs</span>
-        <p class="footer-tagline">Pakistan's most practical embedded systems academy. From Blink to Bare Metal — one real skill at a time.</p>
+        <p class="footer-tagline">Pakistan's most practical embedded systems academy. From Blink to Bare Metal. One real skill at a time.</p>
       </div>
       <div class="footer-links">
         <h4>COURSES</h4>
         <ul>
           <li><a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank">Embedded Systems &amp; IoT Bootcamp →</a></li>
           <li><a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank">PCB Design Bootcamp — L1 →</a></li>
-          <li><a href="#courses">STM32 Embedded Development (Soon)</a></li>
+          <li><a href="https://docs.google.com/forms/d/1rU8_jEswz7tQQXnoqoOomgpeQsHD6aAXrk7GUtZ8Qbo/" target="_blank">STM32 Embedded Development — L1 (July)</a></li>
+          <li><a href="https://docs.google.com/forms/d/1rU8_jEswz7tQQXnoqoOomgpeQsHD6aAXrk7GUtZ8Qbo/" target="_blank">PCB Design Bootcamp — L2 (July)</a></li>
           <li><a href="#courses">ESP32 &amp; Advanced IoT (Soon)</a></li>
           <li><a href="#courses">nRF52 &amp; BLE (Soon)</a></li>
         </ul>
@@ -1377,6 +1256,7 @@ footer {
       <div class="footer-links">
         <h4>CONNECT</h4>
         <ul>
+          <li><a href="mailto:embeduinolabs@gmail.com">embeduinolabs@gmail.com</a></li>
           <li><a href="https://www.instagram.com/embeduinolabs/" target="_blank">Instagram</a></li>
           <li><a href="https://www.linkedin.com/company/embeduinolabs/" target="_blank">LinkedIn</a></li>
           <li><a href="https://www.facebook.com/profile.php?id=61589578627851" target="_blank">Facebook</a></li>
@@ -1386,9 +1266,10 @@ footer {
       <div class="footer-links">
         <h4>QUICK LINKS</h4>
         <ul>
-          <li><a href="#courses">Course Roadmap</a></li>
-          <li><a href="#early-bird">Early Bird Offer</a></li>
-          <li><a href="#faq">FAQ</a></li>
+          <li><a href="courses.html">All Courses</a></li>
+          <li><a href="team.html">Core Team</a></li>
+          <li><a href="ambassador.html">Campus Ambassador Program</a></li>
+          <li><a href="faq.html">FAQ</a></li>
           <li><a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank">Register Now</a></li>
         </ul>
       </div>
