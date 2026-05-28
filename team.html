@@ -119,6 +119,90 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:48px 48
   footer{padding:40px 24px 28px;}
   .footer-top{flex-direction:column;}
 }
+
+/* ─── HAMBURGER MENU ─── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: none;
+  padding: 4px;
+  z-index: 200;
+  flex-shrink: 0;
+}
+.hamburger span {
+  display: block;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+  transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  top: 68px;
+  background: rgba(10,14,23,0.97);
+  backdrop-filter: blur(20px);
+  z-index: 99;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 40px 24px;
+  border-top: 1px solid rgba(0,229,160,0.1);
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  transition: color 0.2s, background 0.2s;
+}
+.mobile-menu a:hover,
+.mobile-menu a.active { color: var(--green); background: rgba(0,229,160,0.06); }
+.mobile-menu .mobile-cta {
+  margin-top: 16px;
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--bg);
+  background: var(--green);
+  padding: 16px 40px;
+  border-radius: 8px;
+  letter-spacing: 1px;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.mobile-menu .mobile-cta:hover { background: var(--green2, #00c98a); color: var(--bg); }
+
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  .nav-links  { display: none !important; }
+  .nav-cta    { display: none !important; }
+  nav { padding: 0 20px; }
+}
 </style>
 </head>
 <body>
@@ -131,6 +215,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:48px 48
 <nav>
   <a href="index.html" class="nav-logo">Embed<span>uino</span> Labs</a>
   <ul class="nav-links">
+    <li><a href="index.html">HOME</a></li>
     <li><a href="courses.html">COURSES</a></li>
     <li><a href="team.html" class="active">TEAM</a></li>
     <li><a href="ambassador.html">CAMPUS AMBASSADOR</a></li>
@@ -138,7 +223,21 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:48px 48
     <li><a href="index.html#faq">FAQ</a></li>
   </ul>
   <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="nav-cta">REGISTER NOW →</a>
+<button id="hamburger" class="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- ─── MOBILE MENU ─── -->
+<div id="mobileMenu" class="mobile-menu">
+  <a href="courses.html">COURSES</a>
+  <a href="team.html" class="active">TEAM</a>
+  <a href="ambassador.html">AMBASSADOR</a>
+  <a href="contact.html">CONTACT</a>
+  <a href="faq.html">FAQ</a>
+  <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="mobile-cta">REGISTER NOW →</a>
+</div>
+
 
 <section>
   <div class="page-hero reveal">
@@ -265,6 +364,34 @@ document.querySelectorAll('a,button').forEach(el=>{
 });
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+<script>
+/* ─── HAMBURGER JS ─── */
+(function() {
+  const btn  = document.getElementById('hamburger');
+  const menu = document.getElementById('mobileMenu');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    const open = menu.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  menu.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      menu.classList.remove('open');
+      btn.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+  document.addEventListener('click', function(e) {
+    if (menu.classList.contains('open') && !menu.contains(e.target) && e.target !== btn) {
+      menu.classList.remove('open');
+      btn.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+})();
 </script>
 </body>
 </html>
