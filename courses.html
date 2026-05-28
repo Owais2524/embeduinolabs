@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Courses - Embeduino Labs</title>
+<meta name="description" content="All Embeduino Labs courses — Embedded Systems, PCB Design, STM32, ESP32, nRF52 BLE. Phase 1 enrolling now. Phase 2 starting July."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0a0e17;--bg2:#0f1422;
+  --green:#00e5a0;--green2:#00c98a;
+  --orange:#ff6b35;--blue:#4a9eff;--purple:#a78bfa;
+  --text:#f0f4ff;--muted:#8896b0;--dim:#566070;
+  --border:rgba(0,229,160,0.15);--border2:rgba(255,255,255,0.07);
+  --mono:'Space Mono',monospace;--sans:'DM Sans',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none;}
+#cursor{position:fixed;width:12px;height:12px;background:var(--green);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.08s,opacity 0.2s;mix-blend-mode:screen;}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,229,160,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.18s ease,width 0.2s,height 0.2s;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:0;}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,160,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,160,0.03) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:0;}
+.glow-1{position:fixed;top:-20%;left:-10%;width:700px;height:700px;background:radial-gradient(circle,rgba(0,229,160,0.07) 0%,transparent 70%);pointer-events:none;z-index:0;}
+.glow-2{position:fixed;bottom:-10%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(255,107,53,0.05) 0%,transparent 70%);pointer-events:none;z-index:0;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:68px;background:rgba(10,14,23,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border2);}
+.nav-logo{font-family:var(--mono);font-weight:700;font-size:18px;color:var(--text);text-decoration:none;}
+.nav-logo span{color:var(--green);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:1px;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--green);}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--bg);background:var(--green);padding:10px 22px;border-radius:6px;text-decoration:none;letter-spacing:1px;transition:background 0.2s,transform 0.15s;}
+.nav-cta:hover{background:var(--green2);transform:translateY(-1px);}
+
+section{position:relative;z-index:1;}
+.section-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(0,229,160,0.15),transparent);margin:0 48px;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+.page-hero{padding:140px 24px 64px;text-align:center;max-width:800px;margin:0 auto;}
+.section-tag-top{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--green);margin-bottom:16px;}
+.page-hero h1{font-family:var(--mono);font-weight:700;font-size:clamp(32px,5vw,54px);letter-spacing:-1.5px;margin-bottom:20px;line-height:1.1;}
+.page-hero h1 .accent{color:var(--green);}
+.page-hero p{font-size:18px;color:var(--muted);line-height:1.7;margin-bottom:40px;}
+
+/* phase label */
+.phase-label{display:flex;align-items:center;gap:16px;margin:8px 0 20px;}
+.phase-label .line{flex:1;height:1px;}
+.phase-label span{font-family:var(--mono);font-size:11px;letter-spacing:3px;white-space:nowrap;}
+
+/* course card full */
+.course-full{background:rgba(0,0,0,0.3);border:1px solid var(--border2);border-radius:20px;padding:48px 52px;max-width:1100px;margin-left:auto;margin-right:auto;position:relative;overflow:hidden;margin-bottom:20px;transition:border-color 0.3s,box-shadow 0.3s,transform 0.25s;}
+.course-full:hover{box-shadow:0 8px 48px rgba(0,229,160,0.1);transform:translateY(-4px);}
+.course-full .accent-bar{position:absolute;left:0;top:0;bottom:0;width:5px;border-radius:5px 0 0 5px;}
+.course-full .ghost-num{position:absolute;right:52px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-weight:700;font-size:120px;line-height:1;pointer-events:none;}
+.course-full-header{display:flex;align-items:flex-start;justify-content:space-between;gap:32px;flex-wrap:wrap;}
+.course-full-info{flex:1;}
+.course-badge-row{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.badge-enroll{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:1.5px;padding:5px 14px;border-radius:4px;}
+.badge-soon-sm{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;padding:5px 14px;border-radius:4px;border:1px dashed rgba(255,255,255,0.12);color:var(--dim);}
+.course-full h2{font-family:var(--mono);font-weight:700;font-size:clamp(18px,2.5vw,28px);margin-bottom:8px;color:var(--text);}
+.course-full .prereq{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:1px;margin-bottom:14px;}
+.course-full .desc{font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:24px;max-width:700px;}
+.course-full .course-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.ctag{font-family:var(--mono);font-size:10px;letter-spacing:1px;padding:5px 12px;border-radius:4px;border:1px solid rgba(0,229,160,0.3);color:var(--green);background:rgba(0,229,160,0.07);}
+
+.course-full .topics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;}
+.topic-row{display:flex;align-items:flex-start;gap:10px;}
+.topic-badge{font-family:var(--mono);font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;border:1px solid;flex-shrink:0;letter-spacing:0.5px;margin-top:1px;}
+.topic-text{font-size:14px;color:var(--dim);line-height:1.5;}
+
+.course-full-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;padding-top:24px;border-top:1px solid var(--border2);}
+.instructor-inline{display:flex;align-items:center;gap:10px;}
+.pricing{font-family:var(--mono);font-size:14px;color:var(--orange);}
+
+.btn-primary{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--bg);background:var(--green);padding:14px 32px;border-radius:8px;text-decoration:none;letter-spacing:1px;transition:background 0.2s,transform 0.15s,box-shadow 0.2s;box-shadow:0 0 24px rgba(0,229,160,0.2);white-space:nowrap;}
+.btn-primary:hover{background:var(--green2);transform:translateY(-2px);}
+.btn-waitlist{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:700;padding:14px 28px;border-radius:8px;text-decoration:none;letter-spacing:1px;transition:background 0.2s,transform 0.15s;white-space:nowrap;}
+
+/* soon grid */
+.soon-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.soon-card{background:rgba(255,255,255,0.02);border:1px dashed var(--border2);border-radius:14px;padding:28px 24px;position:relative;overflow:hidden;transition:border-color 0.2s,background 0.2s;}
+.soon-card:hover{background:rgba(255,255,255,0.035);border-color:rgba(255,255,255,0.12);}
+.soon-card .accent-bar{position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px;}
+.soon-card .ghost-num-sm{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-weight:700;font-size:56px;color:rgba(255,255,255,0.025);pointer-events:none;line-height:1;}
+.soon-card h3{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--muted);margin-bottom:8px;line-height:1.4;}
+.soon-card p{font-size:13px;color:var(--dim);line-height:1.5;margin-bottom:14px;}
+.soon-card .levels{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.soon-card .badge-soon-sm{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:1.5px;padding:3px 10px;border-radius:4px;border:1px dashed rgba(255,255,255,0.1);color:var(--dim);}
+
+/* instructor accordion */
+.instructor-accordion{margin-top:16px;border:1px solid var(--border2);border-radius:10px;overflow:hidden;}
+.instructor-toggle{width:100%;background:rgba(255,255,255,0.025);border:none;cursor:none;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;color:var(--text);font-family:var(--mono);font-size:12px;letter-spacing:1px;transition:background 0.2s;}
+.instructor-toggle:hover{background:rgba(255,255,255,0.045);}
+.instructor-toggle .toggle-left{display:flex;align-items:center;gap:12px;}
+.instructor-toggle .toggle-icon{font-size:16px;transition:transform 0.3s;flex-shrink:0;}
+.instructor-accordion.open .toggle-icon{transform:rotate(45deg);}
+.instructor-panel{max-height:0;overflow:hidden;transition:max-height 0.4s ease;}
+.instructor-accordion.open .instructor-panel{max-height:300px;}
+.instructor-panel-inner{padding:20px 20px 24px;border-top:1px solid var(--border2);display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;}
+.inst-avatar{width:52px;height:52px;border-radius:50%;border:1.5px solid;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:14px;flex-shrink:0;}
+.inst-body{flex:1;min-width:200px;}
+.inst-name{font-family:var(--mono);font-size:13px;font-weight:700;margin-bottom:3px;}
+.inst-title{font-size:12px;margin-bottom:8px;font-family:var(--mono);letter-spacing:0.5px;}
+.inst-bio-text{font-size:14px;color:var(--muted);line-height:1.7;}
+.inst-linkedin{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;letter-spacing:1px;padding:5px 12px;border-radius:4px;border:1px solid rgba(74,158,255,0.25);color:var(--blue);background:rgba(74,158,255,0.05);text-decoration:none;margin-top:10px;transition:background 0.2s;}
+.inst-linkedin:hover{background:rgba(74,158,255,0.12);}
+
+footer{background:var(--bg2);border-top:1px solid var(--border2);padding:48px 48px 32px;position:relative;z-index:1;}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;margin-bottom:40px;flex-wrap:wrap;}
+.footer-brand{max-width:300px;}
+.footer-logo{font-family:var(--mono);font-weight:700;font-size:20px;margin-bottom:12px;display:block;}
+.footer-logo span{color:var(--green);}
+.footer-tagline{font-size:13px;color:var(--dim);line-height:1.6;}
+.footer-links h4{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--muted);margin-bottom:16px;}
+.footer-links ul{list-style:none;}
+.footer-links li{margin-bottom:10px;}
+.footer-links a{font-size:14px;color:var(--dim);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--green);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--border2);flex-wrap:wrap;gap:12px;}
+.footer-copy{font-family:var(--mono);font-size:11px;color:var(--dim);}
+.footer-social{display:flex;gap:16px;}
+.footer-social a{font-size:18px;text-decoration:none;opacity:0.5;transition:opacity 0.2s;}
+.footer-social a:hover{opacity:1;}
+
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .course-full{padding:28px 24px;}
+  .course-full .ghost-num{display:none;}
+  .course-full .topics{grid-template-columns:1fr;}
+  .soon-grid{grid-template-columns:1fr 1fr;}
+  footer{padding:40px 24px 28px;}
+  .footer-top{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div class="grid-bg"></div>
+<div class="glow-1"></div>
+<div class="glow-2"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Embed<span>uino</span> Labs</a>
+  <ul class="nav-links">
+    <li><a href="courses.html" class="active">COURSES</a></li>
+    <li><a href="team.html">TEAM</a></li>
+    <li><a href="ambassador.html">CAMPUS AMBASSADOR</a></li>
+    <li><a href="contact.html">CONTACT</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="nav-cta">REGISTER NOW →</a>
+</nav>
+
+<section>
+  <div class="page-hero reveal">
+    <div class="section-tag-top">COURSE ROADMAP</div>
+    <h1>Your Embedded <span class="accent">Journey</span></h1>
+    <p>Everything we're building, in sequence. One solid foundation before the next level. Phase 1 is enrolling now. Phase 2 starts July.</p>
+  </div>
+</section>
+
+<section style="padding:0 24px 120px;position:relative;z-index:1;">
+  <div style="max-width:1100px;margin:0 auto;">
+
+    <!-- PHASE 1 -->
+    <div class="phase-label reveal">
+      <div class="line" style="background:linear-gradient(90deg,transparent,rgba(0,229,160,0.25));"></div>
+      <span style="color:rgba(0,229,160,0.7);">PHASE 1 — ENROLLING NOW</span>
+      <div class="line" style="background:linear-gradient(90deg,rgba(0,229,160,0.25),transparent);"></div>
+    </div>
+
+    <!-- C01 — Embedded Systems & IoT -->
+    <div class="course-full reveal" id="c01" style="border-color:rgba(74,158,255,0.5);background:rgba(74,158,255,0.05);">
+      <div class="accent-bar" style="background:var(--blue);"></div>
+      <div class="ghost-num" style="color:rgba(74,158,255,0.04);">01</div>
+      <div class="course-full-header">
+        <div class="course-full-info">
+          <div class="course-badge-row">
+            <span class="badge-enroll" style="background:var(--blue);color:var(--bg);">● ENROLLING NOW</span>
+            <span style="font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--muted);">▶ STARTS 13 JUNE · 4 WEEKS · WEEKENDS · ONLINE</span>
+          </div>
+          <h2>Embedded Systems &amp; IoT Bootcamp <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--blue);background:rgba(0,229,160,0.08);border:1px solid rgba(0,229,160,0.25);border-radius:4px;padding:3px 9px;letter-spacing:1px;">Fundamentals Track</span></h2>
+          <p class="prereq">PRE-REQ: NONE — COMPLETE BEGINNER FRIENDLY</p>
+          <p class="desc">Zero to embedded C from scratch, Arduino the right way, ESP8266 wireless projects, and real IoT builds. No prior experience in programming or electronics needed. You'll leave with real projects you built yourself.</p>
+          <div class="course-tags">
+            <span class="ctag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">BEGINNER FRIENDLY</span>
+            <span class="ctag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">HANDS-ON PROJECTS</span>
+            <span class="ctag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">C PROGRAMMING</span>
+            <span class="ctag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">ARDUINO</span>
+            <span class="ctag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">ESP8266</span>
+            <span class="ctag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">IoT</span>
+            <span class="ctag" style="border-color:rgba(74,158,255,0.35);color:var(--blue);background:rgba(74,158,255,0.08);">WEEKENDS</span>
+          </div>
+          <div class="topics">
+            <div class="topic-row">
+              <span class="topic-badge" style="background:rgba(74,158,255,0.1);border-color:rgba(74,158,255,0.35);color:var(--blue);">W1</span>
+              <span class="topic-text">C fundamentals · Variables, loops, functions · Arduino IDE setup</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-badge" style="background:rgba(74,158,255,0.1);border-color:rgba(74,158,255,0.35);color:var(--blue);">W2</span>
+              <span class="topic-text">Digital &amp; Analog I/O · PWM · Sensors · Real circuit builds</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-badge" style="background:rgba(74,158,255,0.1);border-color:rgba(74,158,255,0.35);color:var(--blue);">W3</span>
+              <span class="topic-text">UART · I²C · SPI · ESP8266 · WiFi connectivity · OTA</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-badge" style="background:rgba(74,158,255,0.1);border-color:rgba(74,158,255,0.35);color:var(--blue);">W4</span>
+              <span class="topic-text">IoT platforms · Cloud dashboards · Capstone project</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="course-full-footer">
+      <div class="instructor-accordion" id="acc-owais-1">
+        <button class="instructor-toggle" onclick="toggleAcc('acc-owais-1')">
+          <div class="toggle-left">
+            <span style="font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:1px;">INSTRUCTOR</span>
+            <span style="font-family:var(--mono);font-size:12px;color:var(--blue);">Muhammad Owais</span>
+            <span style="font-size:12px;color:var(--dim);">· 5+ yrs · 350+ students</span>
+          </div>
+          <span class="toggle-icon">+</span>
+        </button>
+        <div class="instructor-panel">
+          <div class="instructor-panel-inner">
+            <div class="inst-avatar" style="border-color:var(--blue);color:var(--blue);background:rgba(0,229,160,0.06);">MO</div>
+            <div class="inst-body">
+              <div class="inst-name" style="color:var(--text);">Muhammad Owais</div>
+              <div class="inst-title" style="color:var(--blue);">Embedded Systems &amp; IoT Instructor</div>
+              <div class="inst-bio-text">5+ years building firmware across IoT, automation, and robotics. Former lab engineer at one of Pakistan's top engineering universities. Former NAVTTC Mechatronics &amp; Robotics assistant instructor. Specialises in medical-grade and industrial embedded systems.</div>
+              <a href="https://www.linkedin.com/in/muhammad-owais07/" target="_blank" class="inst-linkedin">💼 LinkedIn →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="course-full-footer" style="margin-top:16px;">
+        <span class="pricing">PKR <s style="opacity:0.5;">5,000</s> → <strong>3,500</strong> &nbsp;early bird</span>
+        <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="btn-primary" style="background:var(--blue);box-shadow:0 0 24px rgba(74,158,255,0.2);">REGISTER NOW →</a>
+      </div>
+    </div>
+      </div>
+    </div>
+
+      
+
+    <!-- C02 — PCB Design L1 -->
+    <div class="course-full reveal" id="c02" style="border-color:rgba(0,229,160,0.5);background:rgba(0,229,160,0.05);">
+      <div class="accent-bar" style="background:var(--green);"></div>
+      <div class="ghost-num" style="color:rgba(0,229,160,0.05);">02</div>
+      <div class="course-full-header">
+        <div class="course-full-info">
+          <div class="course-badge-row">
+            <span class="badge-enroll" style="background:var(--green);color:var(--bg);">● ENROLLING NOW</span>
+            <span style="font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--muted);">▶ STARTS 13 JUNE · 4 WEEKS · WEEKENDS · ONLINE</span>
+          </div>
+          <h2>Professional PCB Design Bootcamp <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--green);background:rgba(0,229,160,0.08);border:1px solid rgba(0,229,160,0.25);border-radius:4px;padding:3px 9px;letter-spacing:1px;">Level 1</span></h2>
+          <p class="prereq">PRE-REQ: NONE — COMPLETE BEGINNER FRIENDLY</p>
+          <p class="desc">KiCad &amp; EasyEDA, from your first schematic to ordering a real physical board. 1 &amp; 2 layer layout, component libraries, Gerber export, and JLCPCB ordering. You'll hold a PCB you designed yourself.</p>
+          <div class="course-tags">
+            <span class="ctag">BEGINNER FRIENDLY</span>
+            <span class="ctag">KICAD</span>
+            <span class="ctag">EASYEDA</span>
+            <span class="ctag">SCHEMATIC DESIGN</span>
+            <span class="ctag">PCB LAYOUT</span>
+            <span class="ctag">REAL BOARDS</span>
+          </div>
+          <div class="topics">
+            <div class="topic-row">
+              <span class="topic-badge" style="background:rgba(0,229,160,0.1);border-color:rgba(0,229,160,0.3);color:var(--green);">W1</span>
+              <span class="topic-text">KiCad &amp; EasyEDA setup · Schematic editor · Component symbols</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-badge" style="background:rgba(0,229,160,0.1);border-color:rgba(0,229,160,0.3);color:var(--green);">W2</span>
+              <span class="topic-text">Footprint libraries · Custom symbols · Netlist · ERC/DRC</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-badge" style="background:rgba(0,229,160,0.1);border-color:rgba(0,229,160,0.3);color:var(--green);">W3</span>
+              <span class="topic-text">PCB layout · Trace routing · Ground planes · 1 &amp; 2 layer</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-badge" style="background:rgba(0,229,160,0.1);border-color:rgba(0,229,160,0.3);color:var(--green);">W4</span>
+              <span class="topic-text">Gerber export · JLCPCB ordering · Capstone board design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="course-full-footer">
+      <div class="instructor-accordion" id="acc-hayyan-1">
+        <button class="instructor-toggle" onclick="toggleAcc('acc-hayyan-1')">
+          <div class="toggle-left">
+            <span style="font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:1px;">INSTRUCTOR</span>
+            <span style="font-family:var(--mono);font-size:12px;color:var(--green);">Muhammad Hayyan</span>
+            <span style="font-size:12px;color:var(--dim);">· 7+ yrs · 150+ students</span>
+          </div>
+          <span class="toggle-icon">+</span>
+        </button>
+        <div class="instructor-panel">
+          <div class="instructor-panel-inner">
+            <div class="inst-avatar" style="border-color:var(--green);color:var(--green);background:rgba(74,158,255,0.06);">MH</div>
+            <div class="inst-body">
+              <div class="inst-name" style="color:var(--text);">Muhammad Hayyan</div>
+              <div class="inst-title" style="color:var(--green);">Professional PCB Design Instructor</div>
+              <div class="inst-bio-text">7+ years designing reliable, high-integrity PCBs for industrial and consumer applications. Former lab engineer at one of Pakistan's top engineering universities. Focused on signal integrity, design-for-manufacturability, and long-term reliability.</div>
+              <a href="https://www.linkedin.com/in/mhayyan/" target="_blank" class="inst-linkedin">💼 LinkedIn →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="course-full-footer" style="margin-top:16px;">
+        <span class="pricing">PKR <s style="opacity:0.5;">5,000</s> → <strong>3,500</strong> &nbsp;early bird</span>
+        <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="btn-primary">REGISTER NOW →</a>
+      </div>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase-label reveal" style="margin-top:16px;">
+      <div class="line" style="background:linear-gradient(90deg,transparent,rgba(0,229,160,0.18));"></div>
+      <span style="color:rgba(0,229,160,0.5);">PHASE 2 — STARTS JULY · JOIN WAITLIST</span>
+      <div class="line" style="background:linear-gradient(90deg,rgba(0,229,160,0.18),transparent);"></div>
+    </div>
+
+    <!-- C03 — STM32 L1 -->
+    <div class="course-full reveal" id="c03" style="border-color:rgba(74,158,255,0.15);">
+      <div class="accent-bar" style="background:rgba(74,158,255,0.6);"></div>
+      <div class="ghost-num" style="color:rgba(74,158,255,0.03);">03</div>
+      <div class="course-full-header">
+        <div class="course-full-info">
+          <div class="course-badge-row">
+            <span class="badge-enroll" style="background:rgba(74,158,255,0.15);color:var(--blue);border:1px solid rgba(74,158,255,0.3);">▶ STARTS JULY</span>
+          </div>
+          <h2>STM32 Embedded Systems Development <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--blue);background:rgba(74,158,255,0.1);border:1px solid rgba(74,158,255,0.3);border-radius:4px;padding:3px 9px;letter-spacing:1px;">Level 1</span></h2>
+          <p class="prereq">PRE-REQ: EMBEDDED SYSTEMS &amp; IoT BOOTCAMP (OR EQUIVALENT ARDUINO/C EXPERIENCE)</p>
+          <p class="desc">Embedded C on STM32, from clock trees and GPIO to DMA and communication protocols. Real hardware, real registers, zero HAL shortcuts. The course that bridges hobbyist Arduino to professional embedded engineering.</p>
+          <div class="topics">
+            <div class="topic-row">
+              <span class="topic-badge" style="background:rgba(74,158,255,0.1);border-color:rgba(74,158,255,0.3);color:var(--blue);">01</span>
+              <span class="topic-text">GPIO · Clock trees · Timers · PWM · ADC</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-badge" style="background:rgba(74,158,255,0.1);border-color:rgba(74,158,255,0.3);color:var(--blue);">02</span>
+              <span class="topic-text">UART · I²C · SPI · DMA · NVIC · Polling vs Interrupts</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-badge" style="background:rgba(74,158,255,0.1);border-color:rgba(74,158,255,0.3);color:var(--blue);">03</span>
+              <span class="topic-text">Debugging techniques · Logic analyser · Real peripheral projects</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="course-full-footer">
+      <div class="instructor-accordion" id="acc-owais-2">
+        <button class="instructor-toggle" onclick="toggleAcc('acc-owais-2')">
+          <div class="toggle-left">
+            <span style="font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:1px;">INSTRUCTOR</span>
+            <span style="font-family:var(--mono);font-size:12px;color:var(--blue);">Muhammad Owais</span>
+            <span style="font-size:12px;color:var(--dim);">· 5+ yrs · Embedded &amp; IoT</span>
+          </div>
+          <span class="toggle-icon">+</span>
+        </button>
+        <div class="instructor-panel">
+          <div class="instructor-panel-inner">
+            <div class="inst-avatar" style="border-color:var(--blue);color:var(--blue);background:rgba(0,229,160,0.06);">MO</div>
+            <div class="inst-body">
+              <div class="inst-name" style="color:var(--text);">Muhammad Owais</div>
+              <div class="inst-title" style="color:var(--blue);">Embedded Systems &amp; IoT Instructor</div>
+              <div class="inst-bio-text">5+ years building firmware across IoT, automation, and robotics. Former lab engineer at one of Pakistan's top engineering universities. NAVTTC Mechatronics &amp; Robotics assistant instructor. Specialises in medical-grade and industrial embedded systems.</div>
+              <a href="https://www.linkedin.com/in/muhammad-owais07/" target="_blank" class="inst-linkedin">💼 LinkedIn →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="course-full-footer" style="margin-top:16px;">
+        <span style="font-size:13px;color:var(--dim);font-family:var(--mono);">Fee announced at launch</span>
+        <a href="https://docs.google.com/forms/d/1rU8_jEswz7tQQXnoqoOomgpeQsHD6aAXrk7GUtZ8Qbo/" target="_blank" class="btn-waitlist" style="background:rgba(74,158,255,0.12);color:var(--blue);border:1px solid rgba(74,158,255,0.35);">JOIN WAITLIST →</a>
+      </div>
+      </div>
+    </div>
+
+    <!-- C04 — PCB L2 -->
+    <div class="course-full reveal" id="c04" style="border-color:rgba(0,229,160,0.12);">
+      <div class="accent-bar" style="background:rgba(0,229,160,0.5);"></div>
+      <div class="ghost-num" style="color:rgba(0,229,160,0.03);">04</div>
+      <div class="course-full-header">
+        <div class="course-full-info">
+          <div class="course-badge-row">
+            <span class="badge-enroll" style="background:rgba(0,229,160,0.1);color:var(--green);border:1px solid rgba(0,229,160,0.25);">▶ STARTS JULY</span>
+          </div>
+          <h2>Professional PCB Design Bootcamp <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--green);background:rgba(0,229,160,0.08);border:1px solid rgba(0,229,160,0.22);border-radius:4px;padding:3px 9px;letter-spacing:1px;">Level 2</span></h2>
+          <p class="prereq">PRE-REQ: PCB DESIGN BOOTCAMP L1</p>
+          <p class="desc">Advanced PCB engineering, multi-layer boards, signal and power integrity, high-density layout, and manufacturing-ready design for real industrial applications. The step from "I can make a PCB" to "I can make a reliable PCB."</p>
+          <div class="topics">
+            <div class="topic-row">
+              <span class="topic-badge" style="background:rgba(0,229,160,0.08);border-color:rgba(0,229,160,0.2);color:var(--green);">01</span>
+              <span class="topic-text">Multi-layer board stackup · High-speed design principles</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-badge" style="background:rgba(0,229,160,0.08);border-color:rgba(0,229,160,0.2);color:var(--green);">02</span>
+              <span class="topic-text">Signal integrity · Impedance control · Crosstalk mitigation</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-badge" style="background:rgba(0,229,160,0.08);border-color:rgba(0,229,160,0.2);color:var(--green);">03</span>
+              <span class="topic-text">Power integrity · Decoupling strategy · Thermal management</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-badge" style="background:rgba(0,229,160,0.08);border-color:rgba(0,229,160,0.2);color:var(--green);">04</span>
+              <span class="topic-text">DFM · High-density layout · Manufacturing handoff · BOM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="course-full-footer">
+      <div class="instructor-accordion" id="acc-hayyan-2">
+        <button class="instructor-toggle" onclick="toggleAcc('acc-hayyan-2')">
+          <div class="toggle-left">
+            <span style="font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:1px;">INSTRUCTOR</span>
+            <span style="font-family:var(--mono);font-size:12px;color:var(--green);">Muhammad Hayyan</span>
+            <span style="font-size:12px;color:var(--dim);">· 7+ yrs · PCB Design</span>
+          </div>
+          <span class="toggle-icon">+</span>
+        </button>
+        <div class="instructor-panel">
+          <div class="instructor-panel-inner">
+            <div class="inst-avatar" style="border-color:var(--green);color:var(--green);background:rgba(74,158,255,0.06);">MH</div>
+            <div class="inst-body">
+              <div class="inst-name" style="color:var(--text);">Muhammad Hayyan</div>
+              <div class="inst-title" style="color:var(--green);">Professional PCB Design Instructor</div>
+              <div class="inst-bio-text">7+ years designing reliable, high-integrity PCBs for industrial and consumer applications. Former lab engineer at one of Pakistan's top engineering universities. Focused on signal integrity, design-for-manufacturability, and long-term reliability.</div>
+              <a href="https://www.linkedin.com/in/mhayyan/" target="_blank" class="inst-linkedin">💼 LinkedIn →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="course-full-footer" style="margin-top:16px;">
+        <span style="font-size:13px;color:var(--dim);font-family:var(--mono);">Fee announced at launch</span>
+        <a href="https://docs.google.com/forms/d/1rU8_jEswz7tQQXnoqoOomgpeQsHD6aAXrk7GUtZ8Qbo/" target="_blank" class="btn-waitlist" style="background:rgba(0,229,160,0.08);color:var(--green);border:1px solid rgba(0,229,160,0.3);">JOIN WAITLIST →</a>
+      </div>
+      </div>
+    </div>
+
+    <!-- COMING SOON -->
+    <div class="phase-label reveal" style="margin-top:16px;">
+      <div class="line" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,0.07));"></div>
+      <span style="color:rgba(255,255,255,0.2);">COMING SOON</span>
+      <div class="line" style="background:linear-gradient(90deg,rgba(255,255,255,0.07),transparent);"></div>
+    </div>
+
+    <div class="soon-grid reveal">
+      <div class="soon-card">
+        <div class="accent-bar" style="background:rgba(255,107,53,0.6);"></div>
+        <div class="ghost-num-sm">05</div>
+        <h3>ESP32 &amp; Advanced IoT <span style="font-family:var(--mono);font-size:8px;color:#ff6b35;border:1px solid rgba(255,107,53,0.2);border-radius:3px;padding:1px 5px;vertical-align:middle;">L1</span></h3>
+        <p>FreeRTOS, WiFi, BLE, sensor fusion on the ESP32.</p>
+        <span class="badge-soon-sm">COMING SOON</span>
+      </div>
+      <div class="soon-card">
+        <div class="accent-bar" style="background:rgba(74,158,255,0.4);"></div>
+        <div class="ghost-num-sm">06</div>
+        <h3>STM32 Embedded Systems <span style="font-family:var(--mono);font-size:8px;color:#4a9eff;border:1px solid rgba(74,158,255,0.2);border-radius:3px;padding:1px 5px;vertical-align:middle;">L2</span></h3>
+        <p>FreeRTOS, CAN bus, Modbus, HAL vs LL, industrial firmware and more.</p>
+        <span class="badge-soon-sm">COMING SOON</span>
+      </div>
+      <div class="soon-card">
+        <div class="accent-bar" style="background:rgba(255,107,53,0.5);"></div>
+        <div class="ghost-num-sm">07</div>
+        <h3>ESP32 &amp; IIoT <span style="font-family:var(--mono);font-size:8px;color:#ff6b35;border:1px solid rgba(255,107,53,0.2);border-radius:3px;padding:1px 5px;vertical-align:middle;">L2</span></h3>
+        <p>MQTT, Node-RED, cloud pipelines, LoRa, OTA.</p>
+        <span class="badge-soon-sm">COMING SOON</span>
+      </div>
+      <div class="soon-card">
+        <div class="accent-bar" style="background:rgba(167,139,250,0.6);"></div>
+        <div class="ghost-num-sm">08</div>
+        <h3>nRF52 &amp; Bluetooth Low Energy</h3>
+        <p>BLE from the ground up, GATT, bonding, long range, mesh.</p>
+        <span class="badge-soon-sm">COMING SOON</span>
+      </div>
+    </div>
+
+    <p class="reveal" style="text-align:center;font-family:var(--mono);font-size:12px;color:var(--dim);padding-top:32px;letter-spacing:0.5px;">
+      ✦ &nbsp;Advanced track — Mechatronics, Embedded CV, Edge AI &amp; TinyML — announced as the community grows &nbsp;✦
+    </p>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-logo">Embed<span>uino</span> Labs</span>
+        <p class="footer-tagline">Pakistan's most practical embedded systems academy. From Blink to Bare Metal.</p>
+      </div>
+      <div class="footer-links">
+        <h4>COURSES</h4>
+        <ul>
+          <li><a href="#c01">Embedded Systems &amp; IoT →</a></li>
+          <li><a href="#c02">PCB Design Bootcamp L1 →</a></li>
+          <li><a href="#c03">STM32 Development L1 (July)</a></li>
+          <li><a href="#c04">PCB Design Bootcamp L2 (July)</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>NAVIGATE</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="ambassador.html">Campus Ambassador Program</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>CONNECT</h4>
+        <ul>
+          <li><a href="mailto:embeduinolabs@gmail.com">embeduinolabs@gmail.com</a></li>
+          <li><a href="https://www.instagram.com/embeduinolabs/" target="_blank">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/company/embeduinolabs/" target="_blank">LinkedIn</a></li>
+          <li><a href="https://chat.whatsapp.com/IXVrEwwqq3DG2ZBWdb0F39" target="_blank">WhatsApp Community</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Embeduino Labs — @embeduinolabs</span>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/embeduinolabs/" target="_blank">📸</a>
+        <a href="https://www.linkedin.com/company/embeduinolabs/" target="_blank">💼</a>
+        <a href="https://chat.whatsapp.com/IXVrEwwqq3DG2ZBWdb0F39" target="_blank">💬</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleAcc(id){
+  const acc=document.getElementById(id);
+  const isOpen=acc.classList.contains('open');
+  document.querySelectorAll('.instructor-accordion').forEach(a=>a.classList.remove('open'));
+  if(!isOpen)acc.classList.add('open');
+}
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='56px';ring.style.height='56px';cur.style.opacity='0.5';});
+  el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';cur.style.opacity='1';});
+});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

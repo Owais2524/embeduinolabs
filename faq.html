@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FAQ - Embeduino Labs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0a0e17;--bg2:#0f1422;--green:#00e5a0;--green2:#00c98a;--orange:#ff6b35;--blue:#4a9eff;--text:#f0f4ff;--muted:#8896b0;--dim:#566070;--border:rgba(0,229,160,0.15);--border2:rgba(255,255,255,0.07);--mono:'Space Mono',monospace;--sans:'DM Sans',sans-serif;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none;}
+#cursor{position:fixed;width:12px;height:12px;background:var(--green);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.08s,opacity 0.2s;mix-blend-mode:screen;}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,229,160,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.18s ease,width 0.2s,height 0.2s;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:0;}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,160,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,160,0.03) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:0;}
+.glow-1{position:fixed;top:-20%;left:-10%;width:700px;height:700px;background:radial-gradient(circle,rgba(0,229,160,0.07) 0%,transparent 70%);pointer-events:none;z-index:0;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:68px;background:rgba(10,14,23,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border2);}
+.nav-logo{font-family:var(--mono);font-weight:700;font-size:18px;color:var(--text);text-decoration:none;}
+.nav-logo span{color:var(--green);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:1px;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--green);}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--bg);background:var(--green);padding:10px 22px;border-radius:6px;text-decoration:none;letter-spacing:1px;transition:background 0.2s,transform 0.15s;}
+.nav-cta:hover{background:var(--green2);transform:translateY(-1px);}
+section{position:relative;z-index:1;}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.page-hero{padding:140px 24px 64px;text-align:center;max-width:700px;margin:0 auto;}
+.section-tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--green);margin-bottom:16px;}
+.page-hero h1{font-family:var(--mono);font-weight:700;font-size:clamp(32px,5vw,52px);letter-spacing:-1.5px;margin-bottom:16px;line-height:1.1;}
+.page-hero h1 .accent{color:var(--green);}
+.page-hero p{font-size:17px;color:var(--muted);line-height:1.7;}
+/* FAQ */
+.faq-page{padding:0 24px 120px;}
+.faq-inner{max-width:760px;margin:0 auto;}
+.faq-category{margin-bottom:48px;}
+.faq-cat-label{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--green);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.faq-cat-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(0,229,160,0.2),transparent);}
+.faq-item{border-bottom:1px solid var(--border2);}
+.faq-q{width:100%;background:none;border:none;color:var(--text);font-family:var(--mono);font-size:14px;text-align:left;padding:22px 0;cursor:none;display:flex;justify-content:space-between;align-items:center;gap:16px;transition:color 0.2s;}
+.faq-q:hover{color:var(--green);}
+.faq-icon{font-size:18px;flex-shrink:0;transition:transform 0.3s;color:var(--green);}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-a{font-size:15px;color:var(--muted);line-height:1.75;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s;}
+.faq-item.open .faq-a{max-height:400px;padding-bottom:22px;}
+/* still have questions */
+.still-q{max-width:760px;margin:0 auto 80px;background:rgba(0,229,160,0.05);border:1px solid rgba(0,229,160,0.2);border-radius:16px;padding:40px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.still-q h3{font-family:var(--mono);font-weight:700;font-size:20px;margin-bottom:8px;}
+.still-q p{font-size:15px;color:var(--muted);}
+.btn-outline-g{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--green);border:1px solid rgba(0,229,160,0.4);padding:12px 24px;border-radius:6px;text-decoration:none;letter-spacing:1px;transition:background 0.2s;}
+.btn-outline-g:hover{background:rgba(0,229,160,0.08);}
+/* footer */
+footer{background:var(--bg2);border-top:1px solid var(--border2);padding:40px 48px 28px;position:relative;z-index:1;}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.footer-logo{font-family:var(--mono);font-weight:700;font-size:16px;color:var(--text);}
+.footer-logo span{color:var(--green);}
+.footer-copy{font-family:var(--mono);font-size:11px;color:var(--dim);}
+.footer-links-row{display:flex;gap:24px;}
+.footer-links-row a{font-size:13px;color:var(--dim);text-decoration:none;transition:color 0.2s;}
+.footer-links-row a:hover{color:var(--green);}
+@media(max-width:768px){nav{padding:0 20px;}.nav-links{display:none;}.still-q{flex-direction:column;padding:28px 24px;}.faq-page{padding:0 16px 80px;}footer{padding:32px 24px 24px;}.footer-inner{flex-direction:column;align-items:flex-start;}}
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+<div class="grid-bg"></div><div class="glow-1"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Embed<span>uino</span> Labs</a>
+  <ul class="nav-links">
+    <li><a href="courses.html">COURSES</a></li>
+    <li><a href="team.html">TEAM</a></li>
+    <li><a href="ambassador.html">CAMPUS AMBASSADOR</a></li>
+    <li><a href="contact.html">CONTACT</a></li>
+    <li><a href="faq.html" class="active">FAQ</a></li>
+  </ul>
+  <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="nav-cta">REGISTER NOW →</a>
+</nav>
+
+<section>
+  <div class="page-hero reveal">
+    <div class="section-tag">HELP</div>
+    <h1>Common <span class="accent">Questions</span></h1>
+    <p>Everything you need to know before registering. Courses, Pricing, Format and What to expect.</p>
+  </div>
+</section>
+
+<section class="faq-page">
+  <div class="faq-inner">
+
+    <div class="faq-category reveal">
+      <div class="faq-cat-label">GETTING STARTED</div>
+      <div class="faq-item">
+        <button class="faq-q">Do I need any prior experience to join?<span class="faq-icon">+</span></button>
+        <div class="faq-a">No. Absolutely none. Both the Embedded Systems &amp; IoT Bootcamp and the PCB Design Bootcamp are built for complete beginners. The Embedded & IoT Bootcamp starts from Arduino & C programming fundamentals. The PCB Design Bootcamp starts from zero, no prior electronics or PCB experience needed.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Who is this for, students, professionals, or hobbyists?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Everyone. The bootcamp is designed for anyone starting from zero. University Students, Working Professionals expanding into embedded systems, Career Switchers, and Hobbyists who want to go beyond YouTube tutorials. If you want to build real hardware skills, you're in the right place.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Should I take the Embedded Systems course or the PCB Design course first?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Both courses are beginner-friendly, and you can start with either based on your interest. Both Phase 1 courses run simultaneously though, so you can take both at the same time for a more complete embedded systems experience, if you have the capacity.</div>
+      </div>
+    </div>
+
+    <div class="faq-category reveal">
+      <div class="faq-cat-label">PRICING & REGISTRATION</div>
+      <div class="faq-item">
+        <button class="faq-q">How much does each course cost?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Both courses are priced at PKR 5,000 each. Early bird registrants get 30% off, bringing it to PKR 3,500 per course. Register via the Google Form and complete payment to lock your seat. First come, first served.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is the early bird discount real? How does it work?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes 30% off, guaranteed. Register via the Google Form before the early bird deadline and complete payment to lock in your discounted rate. Limited spots, when they're gone, they're gone.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What payment methods are accepted?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Payment details are shared after you submit the registration form. We support common Pakistani payment methods. You'll receive full instructions via WhatsApp or email once your form is submitted.</div>
+      </div>
+    </div>
+
+    <div class="faq-category reveal">
+      <div class="faq-cat-label">FORMAT & DELIVERY</div>
+      <div class="faq-item">
+        <button class="faq-q">Is this course in Urdu or English?<span class="faq-icon">+</span></button>
+        <div class="faq-a">The course is delivered in a mix of Urdu and English. Teaching and explanations in Urdu, technical terms and code in English. This keeps it fully accessible without compromising the technical depth you need to actually work in the field.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Will sessions be live or recorded?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Sessions will be recorded and available to all enrolled students. Live session details are finalised based on registrant preferences, you'll be asked about your preferred schedule and time slots will be finalized on community vote. Your input shapes how we deliver. You'll never fall behind.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How long is each course and when does it run?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Both Phase 1 courses are 4 weeks long, running on weekends (Saturday, Sunday), fully online. They start 13 June 2026.</div>
+      </div>
+    </div>
+
+    <div class="faq-category reveal">
+      <div class="faq-cat-label">HARDWARE & EQUIPMENT</div>
+      <div class="faq-item">
+        <button class="faq-q">What hardware do I need for the Embedded Systems course?<span class="faq-icon">+</span></button>
+        <div class="faq-a">An Arduino board (Uno or Nano), an ESP8266 module (NodeMCU), and a basic component kit (breadboard, resistors, LEDs, sensors, servo & dc motors). The full hardware list will be shared with registered students before launch. Total cost is typically under PKR 3,000 locally.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What do I need for the PCB Design course?<span class="faq-icon">+</span></button>
+        <div class="faq-a">A laptop with KiCad and/or EasyEDA installed (both free). No special hardware needed, you'll design your board digitally and optionally order it from JLCPCB at the end. Full software setup guide is shared before Day 1.</div>
+      </div>
+    </div>
+
+    <div class="faq-category reveal">
+      <div class="faq-cat-label">CERTIFICATION & NEXT STEPS</div>
+      <div class="faq-item">
+        <button class="faq-q">Do I get a certificate?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes. Students who complete the course receive a certificate of completion from Embeduino Labs. We're also working on project-based assessments so your certificate reflects real, demonstrable skills not just attendance.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What comes after Phase 1?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Phase 2 (starting July) introduces STM32 Embedded Development L1 and PCB Design Bootcamp L2 both open for waitlist now. Further courses planned include ESP32 &amp; Advanced IoT, STM32 L2, nRF52 &amp; BLE, and an advanced track covering Embedded CV, Edge AI, and TinyML.</div>
+      </div>
+    </div>
+
+    <div class="still-q reveal">
+      <div>
+        <h3>Still have a question?</h3>
+        <p>We're reachable on Email WhatsApp and LinkedIn. Usually quick to respond.</p>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="mailto:embeduinolabs@gmail.com" class="btn-outline-g">✉ EMAIL US →</a>
+        <a href="https://chat.whatsapp.com/IXVrEwwqq3DG2ZBWdb0F39" target="_blank" class="btn-outline-g">💬 WHATSAPP →</a>
+        <a href="https://www.linkedin.com/company/embeduinolabs/" target="_blank" class="btn-outline-g">💼 LINKEDIN →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">Embed<span>uino</span> Labs</span>
+    <div class="footer-links-row">
+      <a href="index.html">Home</a>
+      <a href="courses.html">Courses</a>
+      <a href="team.html">Team</a>
+      <a href="ambassador.html">CampusAmbassador</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <span class="footer-copy">© 2026 Embeduino Labs</span>
+  </div>
+</footer>
+
+<script>
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.width='56px';ring.style.height='56px';cur.style.opacity='0.5';});el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';cur.style.opacity='1';});});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',()=>{const item=btn.closest('.faq-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open');});});
+</script>
+</body>
+</html>

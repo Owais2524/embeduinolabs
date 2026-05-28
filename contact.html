@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contact - Embeduino Labs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0a0e17;--bg2:#0f1422;--green:#00e5a0;--green2:#00c98a;--orange:#ff6b35;--blue:#4a9eff;--text:#f0f4ff;--muted:#8896b0;--dim:#566070;--border:rgba(0,229,160,0.15);--border2:rgba(255,255,255,0.07);--mono:'Space Mono',monospace;--sans:'DM Sans',sans-serif;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none;}
+#cursor{position:fixed;width:12px;height:12px;background:var(--green);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.08s,opacity 0.2s;mix-blend-mode:screen;}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,229,160,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.18s ease,width 0.2s,height 0.2s;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:0;}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,160,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,160,0.03) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:0;}
+.glow-1{position:fixed;top:-20%;left:-10%;width:700px;height:700px;background:radial-gradient(circle,rgba(0,229,160,0.07) 0%,transparent 70%);pointer-events:none;z-index:0;}
+.glow-2{position:fixed;bottom:-10%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(74,158,255,0.05) 0%,transparent 70%);pointer-events:none;z-index:0;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:68px;background:rgba(10,14,23,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border2);}
+.nav-logo{font-family:var(--mono);font-weight:700;font-size:18px;color:var(--text);text-decoration:none;}
+.nav-logo span{color:var(--green);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:1px;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--green);}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--bg);background:var(--green);padding:10px 22px;border-radius:6px;text-decoration:none;letter-spacing:1px;transition:background 0.2s,transform 0.15s;}
+.nav-cta:hover{background:var(--green2);transform:translateY(-1px);}
+section{position:relative;z-index:1;}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.page-hero{padding:140px 24px 72px;text-align:center;max-width:680px;margin:0 auto;}
+.section-tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--green);margin-bottom:16px;}
+.page-hero h1{font-family:var(--mono);font-weight:700;font-size:clamp(32px,5vw,52px);letter-spacing:-1.5px;margin-bottom:16px;line-height:1.1;}
+.page-hero h1 .accent{color:var(--green);}
+.page-hero p{font-size:17px;color:var(--muted);line-height:1.7;}
+
+/* contact grid */
+.contact-section{padding:0 24px 120px;}
+.contact-inner{max-width:1000px;margin:0 auto;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:48px;}
+
+.contact-card{background:rgba(255,255,255,0.02);border:1px solid var(--border2);border-radius:16px;padding:36px 36px;position:relative;overflow:hidden;text-decoration:none;color:var(--text);display:flex;flex-direction:column;gap:16px;transition:border-color 0.25s,background 0.25s,transform 0.25s,box-shadow 0.25s;}
+.contact-card:hover{transform:translateY(-5px);box-shadow:0 12px 48px rgba(0,0,0,0.3);}
+.contact-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity 0.25s;}
+.contact-card:hover::before{opacity:1;}
+
+.contact-card.email{border-color:rgba(0,229,160,0.2);}
+.contact-card.email:hover{border-color:rgba(0,229,160,0.4);background:rgba(0,229,160,0.04);}
+.contact-card.email::before{background:linear-gradient(90deg,transparent,var(--green),transparent);}
+
+.contact-card.whatsapp{border-color:rgba(37,211,102,0.2);}
+.contact-card.whatsapp:hover{border-color:rgba(37,211,102,0.4);background:rgba(37,211,102,0.04);}
+.contact-card.whatsapp::before{background:linear-gradient(90deg,transparent,#25D366,transparent);}
+
+.contact-card.instagram{border-color:rgba(220,39,67,0.2);}
+.contact-card.instagram:hover{border-color:rgba(220,39,67,0.4);background:rgba(220,39,67,0.04);}
+.contact-card.instagram::before{background:linear-gradient(90deg,transparent,#dc2743,transparent);}
+
+.contact-card.linkedin{border-color:rgba(0,119,181,0.2);}
+.contact-card.linkedin:hover{border-color:rgba(0,119,181,0.4);background:rgba(0,119,181,0.04);}
+.contact-card.linkedin::before{background:linear-gradient(90deg,transparent,#0077B5,transparent);}
+
+.contact-card.facebook{border-color:rgba(24,119,242,0.2);}
+.contact-card.facebook:hover{border-color:rgba(24,119,242,0.4);background:rgba(24,119,242,0.04);}
+.contact-card.facebook::before{background:linear-gradient(90deg,transparent,#1877F2,transparent);}
+
+.contact-card.ambassador{border-color:rgba(255,107,53,0.2);}
+.contact-card.ambassador:hover{border-color:rgba(255,107,53,0.4);background:rgba(255,107,53,0.04);}
+.contact-card.ambassador::before{background:linear-gradient(90deg,transparent,var(--orange),transparent);}
+
+.card-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.card-icon.ig-bg{background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);}
+.card-icon.li-bg{background:#0077B5;}
+.card-icon.fb-bg{background:#1877F2;}
+.card-icon.wa-bg{background:#25D366;}
+.card-icon.em-bg{background:rgba(0,229,160,0.15);border:1px solid rgba(0,229,160,0.3);}
+.card-icon.am-bg{background:rgba(255,107,53,0.15);border:1px solid rgba(255,107,53,0.3);}
+
+.card-body{}
+.card-platform{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--dim);margin-bottom:4px;}
+.card-name{font-family:var(--mono);font-weight:700;font-size:16px;color:var(--text);margin-bottom:4px;}
+.card-handle{font-size:14px;color:var(--muted);}
+.card-desc{font-size:13px;color:var(--dim);line-height:1.5;margin-top:8px;}
+.card-action{margin-top:auto;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--dim);display:flex;align-items:center;gap:6px;transition:color 0.2s;}
+.contact-card:hover .card-action{color:var(--text);}
+
+/* response note */
+.response-note{background:rgba(255,255,255,0.02);border:1px solid var(--border2);border-radius:12px;padding:24px 32px;display:flex;align-items:center;gap:16px;margin-bottom:48px;}
+.response-note .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);flex-shrink:0;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.7);}}
+.response-note p{font-size:14px;color:var(--muted);line-height:1.6;}
+.response-note strong{color:var(--text);}
+
+/* cta strip */
+.contact-cta{background:linear-gradient(135deg,rgba(0,229,160,0.08),rgba(74,158,255,0.06));border:1px solid rgba(0,229,160,0.2);border-radius:16px;padding:40px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.contact-cta h3{font-family:var(--mono);font-weight:700;font-size:20px;margin-bottom:8px;}
+.contact-cta p{font-size:15px;color:var(--muted);}
+.btn-green{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--bg);background:var(--green);padding:14px 32px;border-radius:8px;text-decoration:none;letter-spacing:1px;transition:background 0.2s,transform 0.15s;box-shadow:0 0 24px rgba(0,229,160,0.2);white-space:nowrap;}
+.btn-green:hover{background:var(--green2);transform:translateY(-2px);}
+
+footer{background:var(--bg2);border-top:1px solid var(--border2);padding:40px 48px 28px;position:relative;z-index:1;}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.footer-logo{font-family:var(--mono);font-weight:700;font-size:16px;color:var(--text);}
+.footer-logo span{color:var(--green);}
+.footer-copy{font-family:var(--mono);font-size:11px;color:var(--dim);}
+.footer-links-row{display:flex;gap:24px;}
+.footer-links-row a{font-size:13px;color:var(--dim);text-decoration:none;transition:color 0.2s;}
+.footer-links-row a:hover{color:var(--green);}
+@media(max-width:768px){nav{padding:0 20px;}.nav-links{display:none;}.contact-grid{grid-template-columns:1fr;}.contact-cta{flex-direction:column;padding:28px 24px;}.contact-section{padding:0 16px 80px;}footer{padding:32px 24px 24px;}.footer-inner{flex-direction:column;align-items:flex-start;}}
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+<div class="grid-bg"></div><div class="glow-1"></div><div class="glow-2"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Embed<span>uino</span> Labs</a>
+  <ul class="nav-links">
+    <li><a href="courses.html">COURSES</a></li>
+    <li><a href="team.html">TEAM</a></li>
+    <li><a href="ambassador.html">CAMPUS AMBASSADOR</a></li>
+    <li><a href="contact.html" class="active">CONTACT</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="nav-cta">REGISTER NOW →</a>
+</nav>
+
+<section>
+  <div class="page-hero reveal">
+    <div class="section-tag">GET IN TOUCH</div>
+    <h1>Let's <span class="accent">Connect</span></h1>
+    <p>Questions, feedback, or just want to say hello. We're reachable across all platforms and usually quick to respond.</p>
+  </div>
+</section>
+
+<section class="contact-section">
+  <div class="contact-inner">
+
+    <div class="response-note reveal">
+      <div class="dot"></div>
+      <p><strong>Fastest response:</strong> WhatsApp or LinkedIn DM, we check both daily. Email works great for detailed questions or anything course-related. We typically respond within a few hours.</p>
+    </div>
+
+    <div class="contact-grid">
+
+      <a href="mailto:embeduinolabs@gmail.com" class="contact-card email reveal">
+        <div class="card-icon em-bg">✉</div>
+        <div class="card-body">
+          <div class="card-platform">EMAIL</div>
+          <div class="card-name">General Enquiries</div>
+          <div class="card-handle">embeduinolabs@gmail.com</div>
+          <div class="card-desc">Course questions, payment help, registration issues, partnerships, or anything else.</div>
+        </div>
+        <div class="card-action">SEND EMAIL →</div>
+      </a>
+
+      <a href="https://chat.whatsapp.com/IXVrEwwqq3DG2ZBWdb0F39" target="_blank" class="contact-card whatsapp reveal" style="transition-delay:0.05s;">
+        <div class="card-icon wa-bg">💬</div>
+        <div class="card-body">
+          <div class="card-platform">WHATSAPP</div>
+          <div class="card-name">Community Group</div>
+          <div class="card-handle">Embeduino Labs Community</div>
+          <div class="card-desc">Join our WhatsApp community for updates, announcements, and peer support among students.</div>
+        </div>
+        <div class="card-action">JOIN COMMUNITY →</div>
+      </a>
+
+      <a href="https://www.instagram.com/embeduinolabs/" target="_blank" class="contact-card instagram reveal" style="transition-delay:0.1s;">
+        <div class="card-icon ig-bg">📸</div>
+        <div class="card-body">
+          <div class="card-platform">INSTAGRAM</div>
+          <div class="card-name">@embeduinolabs</div>
+          <div class="card-handle">DM us on Instagram</div>
+          <div class="card-desc">Knowledge posts, course updates, behind-the-scenes, and a fast way to reach us.</div>
+        </div>
+        <div class="card-action">FOLLOW & DM →</div>
+      </a>
+
+      <a href="https://www.linkedin.com/company/embeduinolabs/" target="_blank" class="contact-card linkedin reveal" style="transition-delay:0.15s;">
+        <div class="card-icon li-bg">💼</div>
+        <div class="card-body">
+          <div class="card-platform">LINKEDIN</div>
+          <div class="card-name">Embeduino Labs</div>
+          <div class="card-handle">Connect with us on LinkedIn</div>
+          <div class="card-desc">Professional updates, course announcements, and industry-focused content.</div>
+        </div>
+        <div class="card-action">CONNECT →</div>
+      </a>
+
+      <a href="https://www.facebook.com/profile.php?id=61589578627851" target="_blank" class="contact-card facebook reveal" style="transition-delay:0.2s;">
+        <div class="card-icon fb-bg">📘</div>
+        <div class="card-body">
+          <div class="card-platform">FACEBOOK</div>
+          <div class="card-name">Embeduino Labs</div>
+          <div class="card-handle">Like and follow on Facebook</div>
+          <div class="card-desc">Course posts, community discussions, and updates for the Facebook audience.</div>
+        </div>
+        <div class="card-action">LIKE PAGE →</div>
+      </a>
+
+      <a href="ambassador.html" class="contact-card ambassador reveal" style="transition-delay:0.25s;">
+        <div class="card-icon am-bg">🚀</div>
+        <div class="card-body">
+          <div class="card-platform">AMBASSADOR PROGRAM</div>
+          <div class="card-name">Represent at Your Campus</div>
+          <div class="card-handle">Applications Open</div>
+          <div class="card-desc">Want to build the embedded community at your university? Apply to be a Campus Ambassador.</div>
+        </div>
+        <div class="card-action">LEARN MORE →</div>
+      </a>
+
+    </div>
+
+    <div class="contact-cta reveal">
+      <div>
+        <h3>Ready to register?</h3>
+        <p>Both Phase 1 courses are enrolling now, early bird pricing at PKR 3,500 per course.</p>
+      </div>
+      <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="btn-green">REGISTER NOW →</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">Embed<span>uino</span> Labs</span>
+    <div class="footer-links-row">
+      <a href="index.html">Home</a>
+      <a href="courses.html">Courses</a>
+      <a href="team.html">Team</a>
+      <a href="ambassador.html">Campus Ambassador</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+    <span class="footer-copy">© 2026 Embeduino Labs</span>
+  </div>
+</footer>
+
+<script>
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.width='56px';ring.style.height='56px';cur.style.opacity='0.5';});el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';cur.style.opacity='1';});});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

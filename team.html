@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Team - Embeduino Labs</title>
+<meta name="description" content="Meet the core team and instructors behind Embeduino Labs — Pakistan's most practical embedded systems academy."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:#0a0e17; --bg2:#0f1422; --bg3:#141929;
+  --green:#00e5a0; --green2:#00c98a;
+  --orange:#ff6b35; --blue:#4a9eff; --purple:#a78bfa;
+  --text:#f0f4ff; --muted:#8896b0; --dim:#566070;
+  --border:rgba(0,229,160,0.15); --border2:rgba(255,255,255,0.07);
+  --mono:'Space Mono',monospace; --sans:'DM Sans',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none;}
+#cursor{position:fixed;width:12px;height:12px;background:var(--green);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.08s,opacity 0.2s;mix-blend-mode:screen;}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,229,160,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.18s ease,width 0.2s,height 0.2s,opacity 0.2s;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:0;}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,160,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,160,0.03) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:0;}
+.glow-1{position:fixed;top:-20%;left:-10%;width:700px;height:700px;background:radial-gradient(circle,rgba(0,229,160,0.07) 0%,transparent 70%);pointer-events:none;z-index:0;}
+.glow-2{position:fixed;bottom:-10%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(74,158,255,0.05) 0%,transparent 70%);pointer-events:none;z-index:0;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:68px;background:rgba(10,14,23,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border2);}
+.nav-logo{font-family:var(--mono);font-weight:700;font-size:18px;color:var(--text);text-decoration:none;}
+.nav-logo span{color:var(--green);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:1px;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--green);}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--bg);background:var(--green);padding:10px 22px;border-radius:6px;text-decoration:none;letter-spacing:1px;transition:background 0.2s,transform 0.15s;}
+.nav-cta:hover{background:var(--green2);transform:translateY(-1px);}
+
+section{position:relative;z-index:1;}
+.section-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(0,229,160,0.15),transparent);margin:0 48px;}
+
+.page-hero{padding:140px 24px 80px;text-align:center;max-width:800px;margin:0 auto;}
+.page-hero .section-tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--green);margin-bottom:16px;}
+.page-hero h1{font-family:var(--mono);font-weight:700;font-size:clamp(32px,5vw,56px);letter-spacing:-1.5px;margin-bottom:20px;line-height:1.1;}
+.page-hero h1 .accent{color:var(--green);}
+.page-hero p{font-size:18px;color:var(--muted);line-height:1.7;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ── TEAM SECTION ── */
+.team-section{padding:0 24px 96px;}
+.team-inner{max-width:1100px;margin:0 auto;}
+.section-header{text-align:center;padding:64px 24px 48px;}
+.section-tag-sm{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--green);margin-bottom:12px;}
+.section-header h2{font-family:var(--mono);font-weight:700;font-size:clamp(24px,3.5vw,40px);letter-spacing:-1px;margin-bottom:12px;}
+.section-header h2 .accent{color:var(--green);}
+.section-header p{font-size:16px;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.7;}
+
+/* Co-founder cards */
+.founders-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;}
+.founder-card{background:rgba(0,0,0,0.35);border:1px solid var(--border);border-radius:20px;padding:48px 40px;position:relative;overflow:hidden;transition:border-color 0.3s,box-shadow 0.3s;}
+.founder-card:hover{border-color:rgba(0,229,160,0.3);box-shadow:0 0 60px rgba(0,229,160,0.06);}
+.founder-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--green),transparent);}
+.founder-card .ghost-num{position:absolute;right:-10px;bottom:-20px;font-family:var(--mono);font-weight:700;font-size:140px;color:rgba(0,229,160,0.04);line-height:1;pointer-events:none;}
+
+.founder-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--green);background:rgba(0,229,160,0.08);border:1px solid rgba(0,229,160,0.2);padding:5px 16px;border-radius:20px;margin-bottom:24px;}
+.founder-name{font-family:var(--sans);font-weight:700;font-size:42px;color:var(--text);margin-bottom:4px;}
+.founder-role{font-family:var(--mono);font-size:13px;color:var(--green);letter-spacing:1px;margin-bottom:20px;}
+.founder-divider{height:1px;background:var(--border);margin-bottom:20px;}
+.founder-discipline{font-size:18px;color:var(--muted);font-weight:300;margin-bottom:16px;line-height:1.5;}
+.founder-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+.ftag{font-family:var(--mono);font-size:10px;letter-spacing:1px;padding:4px 10px;border-radius:4px;border:1px solid var(--border2);color:var(--dim);}
+.founder-detail{font-size:15px;color:var(--dim);line-height:1.6;margin-bottom:24px;}
+.founder-linkedin{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--blue);text-decoration:none;border:1px solid rgba(74,158,255,0.2);padding:8px 18px;border-radius:6px;background:rgba(74,158,255,0.05);transition:background 0.2s,border-color 0.2s;}
+.founder-linkedin:hover{background:rgba(74,158,255,0.1);border-color:rgba(74,158,255,0.4);}
+
+/* Instructor cards */
+.instructor-card{background:rgba(0,0,0,0.25);border:1px solid var(--border2);border-radius:16px;padding:40px 40px;position:relative;overflow:hidden;margin-bottom:16px;transition:border-color 0.3s;}
+.instructor-card:hover{border-color:var(--border);}
+.instructor-card .accent-bar{position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:4px 0 0 4px;}
+.instructor-header{display:flex;align-items:flex-start;gap:32px;margin-bottom:24px;}
+.instructor-avatar{width:80px;height:80px;border-radius:50%;border:2px solid;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:22px;flex-shrink:0;}
+.instructor-meta{}
+.instructor-name{font-family:var(--sans);font-weight:700;font-size:28px;color:var(--text);margin-bottom:4px;}
+.instructor-title{font-family:var(--mono);font-size:13px;letter-spacing:1px;margin-bottom:8px;}
+.exp-badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;padding:4px 12px;border-radius:12px;border:1px solid;margin-right:8px;}
+.instructor-bio{font-size:16px;color:var(--muted);line-height:1.75;margin-bottom:20px;}
+.instructor-speciality{font-size:15px;color:var(--text);font-weight:500;margin-bottom:20px;padding:12px 16px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:3px solid var(--green);}
+.instructor-courses{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;}
+.icourse-chip{font-family:var(--mono);font-size:10px;letter-spacing:1px;padding:5px 14px;border-radius:4px;border:1px solid;text-decoration:none;transition:background 0.2s;}
+.instructor-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+
+footer{background:var(--bg2);border-top:1px solid var(--border2);padding:48px 48px 32px;position:relative;z-index:1;}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;margin-bottom:40px;flex-wrap:wrap;}
+.footer-brand{max-width:300px;}
+.footer-logo{font-family:var(--mono);font-weight:700;font-size:20px;margin-bottom:12px;display:block;}
+.footer-logo span{color:var(--green);}
+.footer-tagline{font-size:13px;color:var(--dim);line-height:1.6;}
+.footer-links h4{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--muted);margin-bottom:16px;}
+.footer-links ul{list-style:none;}
+.footer-links li{margin-bottom:10px;}
+.footer-links a{font-size:14px;color:var(--dim);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--green);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--border2);flex-wrap:wrap;gap:12px;}
+.footer-copy{font-family:var(--mono);font-size:11px;color:var(--dim);}
+.footer-social{display:flex;gap:16px;}
+.footer-social a{font-size:18px;text-decoration:none;opacity:0.5;transition:opacity 0.2s;}
+.footer-social a:hover{opacity:1;}
+
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .founders-grid{grid-template-columns:1fr;}
+  .instructor-header{flex-direction:column;}
+  .instructor-footer{flex-direction:column;align-items:flex-start;}
+  .team-section{padding:0 16px 64px;}
+  footer{padding:40px 24px 28px;}
+  .footer-top{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div class="grid-bg"></div>
+<div class="glow-1"></div>
+<div class="glow-2"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Embed<span>uino</span> Labs</a>
+  <ul class="nav-links">
+    <li><a href="courses.html">COURSES</a></li>
+    <li><a href="team.html" class="active">TEAM</a></li>
+    <li><a href="ambassador.html">CAMPUS AMBASSADOR</a></li>
+    <li><a href="index.html#connect">CONNECT</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+  </ul>
+  <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="nav-cta">REGISTER NOW →</a>
+</nav>
+
+<section>
+  <div class="page-hero reveal">
+    <div class="section-tag">THE PEOPLE</div>
+    <h1>Built by engineers.<br/><span class="accent">For engineers.</span></h1>
+    <p>A small, focused team from Pakistan's engineering community, building the practical embedded systems education that didn't exist here.</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── CO-FOUNDERS ── -->
+<section class="team-section">
+  <div class="team-inner">
+    <div class="section-header reveal">
+      <div class="section-tag-sm">CO-FOUNDERS</div>
+      <h2>The People <span class="accent">Building This</span></h2>
+      <p>From the ground up. For Pakistan's engineering community.</p>
+    </div>
+
+    <div class="founders-grid">
+
+      <!-- Owais -->
+      <div class="founder-card reveal" id="owais">
+        <div class="ghost-num">01</div>
+        <div class="founder-badge">● CO-FOUNDER</div>
+        <div class="founder-name">Owais</div>
+        <div class="founder-role">Lead Instructor · Embedded Systems Engineer</div>
+        <div class="founder-divider"></div>
+        <div class="founder-discipline">Mechatronics &amp; Systems Engineering</div>
+        <div class="founder-tags">
+          <span class="ftag">EMBEDDED SYSTEMS</span>
+          <span class="ftag">FIRMWARE</span>
+          <span class="ftag">IoT</span>
+          <span class="ftag">ROBOTICS</span>
+          <span class="ftag">AUTOMATION</span>
+        </div>
+        <div class="founder-detail">
+          5+ years building firmware and embedded solutions across IoT, automation, and robotics. From local startups to international clients and safety-critical industries. Former lab engineer at one of Pakistan's top engineering universities. Former NAVTTC Mechatronics &amp; Robotics assistant instructor with 350+ students taught. Passionate about making professional-grade embedded education accessible in Pakistan.
+        </div>
+        <a href="https://www.linkedin.com/in/muhammad-owais07/" target="_blank" class="founder-linkedin">💼 LinkedIn →</a>
+      </div>
+
+      <!-- Umema -->
+      <div class="founder-card reveal" id="umema">
+        <div class="ghost-num">02</div>
+        <div class="founder-badge">● CO-FOUNDER</div>
+        <div class="founder-name">Umema</div>
+        <div class="founder-role">Operations Lead · Electronics Engineer</div>
+        <div class="founder-divider"></div>
+        <div class="founder-discipline">Electronics Engineering — NED University</div>
+        <div class="founder-tags">
+          <span class="ftag">EMBEDDED SYSTEMS</span>
+          <span class="ftag">PCB DESIGN</span>
+          <span class="ftag">AI</span>
+          <span class="ftag">TEAM LEADERSHIP</span>
+          <span class="ftag">OPERATIONS</span>
+        </div>
+        <div class="founder-detail">
+          Electronics engineer from NED University with a strong background in embedded systems, PCB design, and AI. Actively involved in university societies, technical events, and engineering competitions, holding lead positions in multiple initiatives. Brings operational rigour, community-building instincts, and a passion for getting things built. The engine that keeps Embeduino Labs running.
+        </div>
+        <a href="https://www.linkedin.com/in/umema-waheed-7737212b2/" target="_blank" class="founder-linkedin">💼 LinkedIn →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-logo">Embed<span>uino</span> Labs</span>
+        <p class="footer-tagline">Pakistan's most practical embedded systems academy. From Blink to Bare Metal.</p>
+      </div>
+      <div class="footer-links">
+        <h4>COURSES</h4>
+        <ul>
+          <li><a href="courses.html">All Courses</a></li>
+          <li><a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank">Register Now →</a></li>
+          <li><a href="https://docs.google.com/forms/d/1rU8_jEswz7tQQXnoqoOomgpeQsHD6aAXrk7GUtZ8Qbo/" target="_blank">Join Waitlist (July)</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>NAVIGATE</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="ambassador.html">Campus Ambassador Program</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>CONNECT</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/embeduinolabs/" target="_blank">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/company/embeduinolabs/" target="_blank">LinkedIn</a></li>
+          <li><a href="https://chat.whatsapp.com/IXVrEwwqq3DG2ZBWdb0F39" target="_blank">WhatsApp Community</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Embeduino Labs — @embeduinolabs</span>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/embeduinolabs/" target="_blank">📸</a>
+        <a href="https://www.linkedin.com/company/embeduinolabs/" target="_blank">💼</a>
+        <a href="https://chat.whatsapp.com/IXVrEwwqq3DG2ZBWdb0F39" target="_blank">💬</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='56px';ring.style.height='56px';cur.style.opacity='0.5';});
+  el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';cur.style.opacity='1';});
+});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

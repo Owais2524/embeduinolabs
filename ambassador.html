@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Campus Ambassador Program - Embeduino Labs</title>
+<meta name="description" content="Represent Embeduino Labs at your university. Build community, earn perks, and grow your professional profile."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0a0e17;--bg2:#0f1422;--bg3:#141929;
+  --green:#00e5a0;--green2:#00c98a;
+  --orange:#ff6b35;--blue:#4a9eff;--purple:#a78bfa;
+  --text:#f0f4ff;--muted:#8896b0;--dim:#566070;
+  --border:rgba(0,229,160,0.15);--border2:rgba(255,255,255,0.07);
+  --mono:'Space Mono',monospace;--sans:'DM Sans',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none;}
+#cursor{position:fixed;width:12px;height:12px;background:var(--orange);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.08s,opacity 0.2s;mix-blend-mode:screen;}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(255,107,53,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.18s ease,width 0.2s,height 0.2s;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:0;}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(255,107,53,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,107,53,0.025) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:0;}
+.glow-1{position:fixed;top:-20%;left:-10%;width:700px;height:700px;background:radial-gradient(circle,rgba(255,107,53,0.07) 0%,transparent 70%);pointer-events:none;z-index:0;}
+.glow-2{position:fixed;bottom:-10%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(0,229,160,0.06) 0%,transparent 70%);pointer-events:none;z-index:0;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:68px;background:rgba(10,14,23,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border2);}
+.nav-logo{font-family:var(--mono);font-weight:700;font-size:18px;color:var(--text);text-decoration:none;}
+.nav-logo span{color:var(--green);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:1px;transition:color 0.2s;}
+.nav-links a:hover{color:var(--green);}
+.nav-links a.active{color:var(--orange);}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--bg);background:var(--green);padding:10px 22px;border-radius:6px;text-decoration:none;letter-spacing:1px;transition:background 0.2s,transform 0.15s;}
+.nav-cta:hover{background:var(--green2);transform:translateY(-1px);}
+
+section{position:relative;z-index:1;}
+.section-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,107,53,0.15),transparent);margin:0 48px;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ── HERO ── */
+.amb-hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 24px 80px;text-align:center;position:relative;}
+.amb-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(255,107,53,0.08) 0%,transparent 65%);pointer-events:none;}
+
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--orange);letter-spacing:2px;background:rgba(255,107,53,0.08);border:1px solid rgba(255,107,53,0.25);padding:8px 20px;border-radius:20px;margin-bottom:40px;opacity:0;animation:fadeUp 0.6s 0.2s forwards;}
+.hero-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 8px var(--orange);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.8);}}
+
+.amb-hero h1{font-family:var(--mono);font-weight:700;font-size:clamp(38px,6vw,80px);line-height:1.05;letter-spacing:-2px;margin-bottom:28px;opacity:0;animation:fadeUp 0.7s 0.4s forwards;}
+.amb-hero h1 .accent-orange{color:var(--orange);}
+.amb-hero h1 .accent-green{color:var(--green);}
+
+.amb-hero .sub{font-size:clamp(16px,2vw,20px);color:var(--muted);max-width:560px;line-height:1.7;margin-bottom:48px;font-weight:300;opacity:0;animation:fadeUp 0.7s 0.6s forwards;}
+
+.btn-orange{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--bg);background:var(--orange);padding:16px 36px;border-radius:8px;text-decoration:none;letter-spacing:1px;transition:background 0.2s,transform 0.15s,box-shadow 0.2s;box-shadow:0 0 24px rgba(255,107,53,0.25);}
+.btn-orange:hover{background:#ff8555;transform:translateY(-2px);box-shadow:0 0 40px rgba(255,107,53,0.4);}
+.btn-outline{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;color:var(--text);background:rgba(255,255,255,0.05);border:1px solid var(--border2);padding:16px 32px;border-radius:8px;text-decoration:none;letter-spacing:1px;transition:background 0.2s,border-color 0.2s,transform 0.15s;}
+.btn-outline:hover{background:rgba(255,255,255,0.09);border-color:rgba(255,107,53,0.3);transform:translateY(-2px);}
+
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeUp 0.7s 0.8s forwards;}
+
+/* diagonal accent */
+.diag-accent{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
+.diag-accent::before{content:'';position:absolute;top:0;right:-200px;width:800px;height:800px;background:linear-gradient(135deg,transparent 40%,rgba(255,107,53,0.03) 40%,rgba(255,107,53,0.03) 60%,transparent 60%);transform:rotate(-15deg);transform-origin:center;}
+
+/* ── WHAT IS IT ── */
+.what-section{padding:0 24px 96px;}
+.what-inner{max-width:1100px;margin:0 auto;}
+.section-header{text-align:center;padding:64px 24px 48px;}
+.section-tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--orange);margin-bottom:16px;}
+.section-header h2{font-family:var(--mono);font-weight:700;font-size:clamp(26px,4vw,44px);letter-spacing:-1px;margin-bottom:16px;}
+.section-header h2 .accent{color:var(--orange);}
+.section-header p{font-size:17px;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.7;}
+
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+.what-text p{font-size:18px;color:var(--muted);line-height:1.8;margin-bottom:20px;font-weight:300;}
+.what-text p strong{color:var(--text);font-weight:500;}
+.what-text p .hl{color:var(--orange);}
+
+.what-callout{background:rgba(255,107,53,0.05);border:1px solid rgba(255,107,53,0.2);border-radius:16px;padding:32px 36px;position:relative;overflow:hidden;}
+.what-callout::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--orange),transparent);}
+.what-callout .big-word{font-family:var(--mono);font-weight:700;font-size:56px;color:var(--orange);line-height:1;margin-bottom:8px;}
+.what-callout .big-label{font-family:var(--mono);font-size:13px;letter-spacing:2px;color:rgba(255,107,53,0.6);margin-bottom:24px;}
+.what-callout p{font-size:16px;color:var(--muted);line-height:1.7;}
+
+/* ── BENEFITS ── */
+.benefits-section{padding:0 24px 96px;}
+.benefits-inner{max-width:1100px;margin:0 auto;}
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.benefit-card{background:rgba(255,255,255,0.02);border:1px solid var(--border2);border-radius:14px;padding:32px 28px;position:relative;overflow:hidden;transition:border-color 0.2s,background 0.2s,transform 0.2s;}
+.benefit-card:hover{border-color:rgba(255,107,53,0.25);background:rgba(255,107,53,0.03);transform:translateY(-4px);}
+.benefit-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--orange),transparent);opacity:0;transition:opacity 0.2s;}
+.benefit-card:hover::before{opacity:1;}
+.benefit-icon{font-size:32px;margin-bottom:16px;display:block;}
+.benefit-card h3{font-family:var(--mono);font-weight:700;font-size:15px;color:var(--text);margin-bottom:10px;letter-spacing:0.3px;}
+.benefit-card p{font-size:14px;color:var(--muted);line-height:1.6;}
+.benefit-num{position:absolute;right:20px;top:20px;font-family:var(--mono);font-weight:700;font-size:48px;color:rgba(255,107,53,0.05);}
+
+/* ── WHO CAN APPLY ── */
+.who-section{padding:0 24px 96px;}
+.who-inner{max-width:1100px;margin:0 auto;}
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.who-card{background:rgba(0,0,0,0.25);border:1px solid var(--border2);border-radius:14px;padding:32px 32px;}
+.who-card h3{font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:2px;margin-bottom:20px;color:var(--orange);}
+.who-list{list-style:none;}
+.who-list li{font-size:15px;color:var(--muted);padding:10px 0;border-bottom:1px solid var(--border2);display:flex;align-items:center;gap:12px;line-height:1.4;}
+.who-list li::before{content:'✓';color:var(--orange);font-family:var(--mono);font-weight:700;font-size:12px;flex-shrink:0;}
+.who-list li:last-child{border-bottom:none;}
+
+/* ── HOW IT WORKS ── */
+.how-section{padding:0 24px 96px;}
+.how-inner{max-width:1100px;margin:0 auto;}
+.how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.how-step{background:rgba(255,255,255,0.02);border:1px solid var(--border2);border-radius:14px;padding:32px 24px;position:relative;text-align:center;}
+.how-step::after{content:'→';position:absolute;right:-14px;top:50%;transform:translateY(-50%);font-size:20px;color:rgba(255,107,53,0.3);font-family:var(--mono);}
+.how-step:last-child::after{display:none;}
+.step-num{font-family:var(--mono);font-weight:700;font-size:11px;letter-spacing:2px;color:var(--orange);margin-bottom:16px;display:block;}
+.step-icon{font-size:28px;margin-bottom:12px;display:block;}
+.how-step h3{font-family:var(--mono);font-weight:700;font-size:13px;color:var(--text);margin-bottom:8px;}
+.how-step p{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* ── FINAL CTA ── */
+.amb-cta{padding:96px 24px 120px;text-align:center;position:relative;}
+.amb-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(255,107,53,0.07) 0%,transparent 65%);pointer-events:none;}
+.amb-cta h2{font-family:var(--mono);font-weight:700;font-size:clamp(32px,5vw,56px);letter-spacing:-1.5px;margin-bottom:20px;}
+.amb-cta h2 .accent{color:var(--orange);}
+.amb-cta p{font-size:17px;color:var(--muted);max-width:480px;margin:0 auto 40px;line-height:1.7;}
+
+/* ── FOOTER ── */
+footer{background:var(--bg2);border-top:1px solid var(--border2);padding:48px 48px 32px;position:relative;z-index:1;}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;margin-bottom:40px;flex-wrap:wrap;}
+.footer-brand{max-width:300px;}
+.footer-logo{font-family:var(--mono);font-weight:700;font-size:20px;margin-bottom:12px;display:block;}
+.footer-logo span{color:var(--green);}
+.footer-tagline{font-size:13px;color:var(--dim);line-height:1.6;}
+.footer-links h4{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--muted);margin-bottom:16px;}
+.footer-links ul{list-style:none;}
+.footer-links li{margin-bottom:10px;}
+.footer-links a{font-size:14px;color:var(--dim);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--green);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--border2);flex-wrap:wrap;gap:12px;}
+.footer-copy{font-family:var(--mono);font-size:11px;color:var(--dim);}
+.footer-social{display:flex;gap:16px;}
+.footer-social a{font-size:18px;text-decoration:none;opacity:0.5;transition:opacity 0.2s;}
+.footer-social a:hover{opacity:1;}
+
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .what-grid{grid-template-columns:1fr;}
+  .benefits-grid{grid-template-columns:1fr;}
+  .who-grid{grid-template-columns:1fr;}
+  .how-steps{grid-template-columns:1fr 1fr;}
+  .how-step::after{display:none;}
+  footer{padding:40px 24px 28px;}
+  .footer-top{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div class="grid-bg"></div>
+<div class="glow-1"></div>
+<div class="glow-2"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Embed<span>uino</span> Labs</a>
+  <ul class="nav-links">
+    <li><a href="courses.html">COURSES</a></li>
+    <li><a href="team.html">TEAM</a></li>
+    <li><a href="ambassador.html" class="active">CAMPUS AMBASSADOR</a></li>
+    <li><a href="index.html#connect">CONNECT</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+  </ul>
+  <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="nav-cta">REGISTER NOW →</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="amb-hero">
+  <div class="diag-accent"></div>
+  <div class="hero-badge">🚀 APPLICATIONS OPEN</div>
+  <h1>Your Campus.<br/><span class="accent-orange">Your Community.</span><br/><span class="accent-green">Your Impact.</span></h1>
+  <p class="sub">Represent Embeduino Labs at your university. Build the engineering community Pakistan needs and grow your own professional profile while doing it.</p>
+  <div class="hero-actions">
+    <a href="https://docs.google.com/forms/d/1dGoFIoc6D6GnOCrVKgK1EHheiPkcqqGfY4cH4ZOe-p8/" target="_blank" class="btn-orange">🚀 APPLY NOW →</a>
+    <a href="#what" class="btn-outline">LEARN MORE ↓</a>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── WHAT IS IT ── -->
+<section class="what-section" id="what">
+  <div class="what-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">PROGRAM OVERVIEW</div>
+      <h2>What Is the <span class="accent">Ambassador Program?</span></h2>
+      <p>A community initiative connecting passionate engineering students across Pakistan to Embeduino Labs.</p>
+    </div>
+
+    <div class="what-grid reveal">
+      <div class="what-text">
+        <p>Pakistan has thousands of engineering students every year. Most graduate without ever touching a real microcontroller, designing a real PCB, or building a real embedded system. <strong>That's the problem we're solving.</strong></p>
+        <p>The Campus Ambassador Program is how we scale that mission. <span class="hl">You become the bridge between Embeduino Labs and your campus</span> spreading awareness, building community, and helping your peers find a path into practical engineering.</p>
+        <p>You don't need to be an expert. You need to <strong>care about building a real engineering culture at your university.</strong></p>
+      </div>
+      <div class="what-callout">
+        <div class="big-word">🚀</div>
+        <div class="big-label">DRIVEN STUDENTS FROM EVERY CAMPUS</div>
+        <p>We're building a network of motivated students from universities across Pakistan. Represent Embeduino Labs at your campus, spread awareness, grow the community, and shape the future of engineering education here.</p>
+        <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,107,53,0.15);">
+          <div style="font-family:var(--mono);font-size:11px;letter-spacing:2px;color:rgba(255,107,53,0.6);margin-bottom:8px;">OPEN TO</div>
+          <div style="font-size:15px;color:var(--muted);line-height:1.6;">All Pakistani universities · All engineering disciplines · All year groups</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── BENEFITS ── -->
+<section class="benefits-section" id="benefits">
+  <div class="benefits-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">WHAT YOU GET</div>
+      <h2>Benefits of <span class="accent">Being an Ambassador</span></h2>
+      <p>Real perks. Real value. Real impact on your professional profile.</p>
+    </div>
+
+    <div class="benefits-grid">
+      <div class="benefit-card reveal">
+        <div class="benefit-num">01</div>
+        <span class="benefit-icon">🎓</span>
+        <h3>Course Discount Coupons</h3>
+        <p>Get exclusive discount coupons to all Embeduino Labs courses, for yourself and to share with your campus community.</p>
+      </div>
+      <div class="benefit-card reveal" style="transition-delay:0.05s;">
+        <div class="benefit-num">02</div>
+        <span class="benefit-icon">📜</span>
+        <h3>Official Certification</h3>
+        <p>Receive an official Embeduino Labs Ambassador Certificate, a real credential to add to your CV and LinkedIn profile.</p>
+      </div>
+      <div class="benefit-card reveal" style="transition-delay:0.1s;">
+        <div class="benefit-num">03</div>
+        <span class="benefit-icon">🤝</span>
+        <h3>Professional Mentorship</h3>
+        <p>Direct access to our instructors and co-founders for guidance on embedded systems, PCB design, and career development.</p>
+      </div>
+      <div class="benefit-card reveal" style="transition-delay:0.15s;">
+        <div class="benefit-num">04</div>
+        <span class="benefit-icon">🌐</span>
+        <h3>Leadership &amp; Networking</h3>
+        <p>Build your professional network across universities in Pakistan. Lead initiatives. Organise events. Get seen by industry.</p>
+      </div>
+      <div class="benefit-card reveal" style="transition-delay:0.2s;">
+        <div class="benefit-num">05</div>
+        <span class="benefit-icon">📈</span>
+        <h3>Early Profile Building</h3>
+        <p>Most students wait until after graduation to build their professional profile. Ambassadors start now, years ahead.</p>
+      </div>
+      <div class="benefit-card reveal" style="transition-delay:0.25s;">
+        <div class="benefit-num">06</div>
+        <span class="benefit-icon">⚡</span>
+        <h3>Community Impact</h3>
+        <p>Be part of something larger. Help build the engineering community Pakistan needs, from inside your own campus.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── WHO CAN APPLY ── -->
+<section class="who-section" id="eligibility">
+  <div class="who-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">ELIGIBILITY</div>
+      <h2>Who Can <span class="accent">Apply?</span></h2>
+      <p>Simple requirements. Open to almost everyone from Pakistan's engineering community.</p>
+    </div>
+
+    <div class="who-grid reveal">
+      <div class="who-card">
+        <h3>YOU SHOULD BE</h3>
+        <ul class="who-list">
+          <li>A student at any Pakistani university</li>
+          <li>Genuinely passionate about engineering and technology</li>
+          <li>Willing to spread awareness at your campus</li>
+          <li>Active on at least one social platform (WhatsApp/Instagram/LinkedIn)</li>
+          <li>A self-starter who doesn't need to be micromanaged</li>
+          <li>Interested in embedded systems, PCB design, or IoT (even as a beginner)</li>
+        </ul>
+      </div>
+      <div class="who-card">
+        <h3>YOU DON'T NEED TO BE</h3>
+        <ul class="who-list">
+          <li>An expert in embedded systems or electronics</li>
+          <li>A final-year student. All years are welcome</li>
+          <li>From a specific discipline, EE, CS, Mechatronics, and beyond</li>
+          <li>Already enrolled in any Embeduino Labs course</li>
+          <li>A high GPA student. We care about drive, not grades</li>
+          <li>Based in any specific city. All cities across Pakistan</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="how-section" id="process">
+  <div class="how-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">PROCESS</div>
+      <h2>How It <span class="accent">Works</span></h2>
+      <p>Four simple steps from application to ambassador.</p>
+    </div>
+
+    <div class="how-steps reveal">
+      <div class="how-step">
+        <span class="step-num">STEP 01</span>
+        <span class="step-icon">📋</span>
+        <h3>Apply Online</h3>
+        <p>Fill out the short application form. Tell us about yourself, your university, and why you want to represent Embeduino Labs.</p>
+      </div>
+      <div class="how-step">
+        <span class="step-num">STEP 02</span>
+        <span class="step-icon">🔍</span>
+        <h3>Profile Screening</h3>
+        <p>We review your application and shortlist candidates based on your drive, attitude, and community spirit, not your grades.</p>
+      </div>
+      <div class="how-step">
+        <span class="step-num">STEP 03</span>
+        <span class="step-icon">⚡</span>
+        <h3>Complete Tasks</h3>
+        <p>Shortlisted candidates receive a small set of tasks. Complete them, show us how you show up when it counts.</p>
+      </div>
+      <div class="how-step">
+        <span class="step-num">STEP 04</span>
+        <span class="step-icon">🏆</span>
+        <h3>Get Recognised</h3>
+        <p>Candidates who complete the tasks are recognised as official ambassadors and receive all program perks and certification.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── FAQ ── -->
+<section style="padding:0 24px 96px;">
+  <div style="max-width:720px;margin:0 auto;">
+    <div class="section-header reveal" style="padding-top:0;">
+      <div class="section-tag">FAQ</div>
+      <h2>Quick <span class="accent">Questions</span></h2>
+    </div>
+
+    <div style="border-top:1px solid var(--border2);">
+      <div class="faq-item reveal">
+        <button class="faq-q">Is the ambassador role paid?<span class="faq-icon">+</span></button>
+        <div class="faq-a">It's not a paid role but the benefits are real. Course discount coupons, official certification, mentorship, and early career profile building. The intangible value of leading a community initiative at your campus is something money doesn't buy.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">How much time does it take?<span class="faq-icon">+</span></button>
+        <div class="faq-a">There's no fixed time commitment. Share posts, spread the word through your existing university networks, and participate when we run campaigns or events. It fits around your studies.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Can I apply if I know nothing about embedded systems?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes absolutely. What we care about is your drive and community spirit, not your technical level. Your curiosity is exactly the kind of energy we want representing Embeduino Labs.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">What is the selection process?<span class="faq-icon">+</span></button>
+        <div class="faq-a">We review applications and shortlist candidates based on profile and attitude. Shortlisted candidates are given a small set of tasks. Whoever completes them gets officially recognised as an ambassador and receives all the perks. No interviews, just show us how you show up.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">What exactly will I have to do as an ambassador?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Share our content on your social media. Spread awareness about our courses at your campus. Help us understand what students at your university need. Participate in campaigns when we run them. Nothing complicated, just genuine community building.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">How long does the program last?<span class="faq-icon">+</span></button>
+        <div class="faq-a">The program runs in cohorts aligned with our course phases. Ambassadors who stay active and engaged are invited to continue and grow with us into future cohorts.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="amb-cta">
+  <h2 class="reveal">Ready to <span class="accent">represent?</span></h2>
+  <p class="reveal">Applications are open now. Apply, complete the tasks, and get officially recognised as an Embeduino Labs Campus Ambassador.</p>
+  <a href="https://docs.google.com/forms/d/1dGoFIoc6D6GnOCrVKgK1EHheiPkcqqGfY4cH4ZOe-p8/" target="_blank" class="btn-orange reveal" style="font-size:15px;padding:18px 48px;">
+    🚀 APPLY NOW →
+  </a>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-logo">Embed<span>uino</span> Labs</span>
+        <p class="footer-tagline">Pakistan's most practical embedded systems academy. From Blink to Bare Metal.</p>
+      </div>
+      <div class="footer-links">
+        <h4>COURSES</h4>
+        <ul>
+          <li><a href="courses.html">All Courses</a></li>
+          <li><a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank">Register Now →</a></li>
+          <li><a href="https://docs.google.com/forms/d/1rU8_jEswz7tQQXnoqoOomgpeQsHD6aAXrk7GUtZ8Qbo/" target="_blank">Join Waitlist (July)</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>NAVIGATE</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="ambassador.html">Campus Ambassador Program</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>CONNECT</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/embeduinolabs/" target="_blank">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/company/embeduinolabs/" target="_blank">LinkedIn</a></li>
+          <li><a href="https://chat.whatsapp.com/IXVrEwwqq3DG2ZBWdb0F39" target="_blank">WhatsApp Community</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Embeduino Labs — @embeduinolabs</span>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/embeduinolabs/" target="_blank">📸</a>
+        <a href="https://www.linkedin.com/company/embeduinolabs/" target="_blank">💼</a>
+        <a href="https://chat.whatsapp.com/IXVrEwwqq3DG2ZBWdb0F39" target="_blank">💬</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+.faq-item{border-bottom:1px solid var(--border2);}
+.faq-q{width:100%;background:none;border:none;color:var(--text);font-family:var(--mono);font-size:14px;text-align:left;padding:22px 0;cursor:none;display:flex;justify-content:space-between;align-items:center;gap:16px;transition:color 0.2s;}
+.faq-q:hover{color:var(--orange);}
+.faq-icon{font-size:18px;flex-shrink:0;transition:transform 0.3s;color:var(--orange);}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-a{font-size:14px;color:var(--muted);line-height:1.7;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s;}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:22px;}
+</style>
+
+<script>
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='56px';ring.style.height='56px';cur.style.opacity='0.5';});
+  el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';cur.style.opacity='1';});
+});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.closest('.faq-item');
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!isOpen)item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
