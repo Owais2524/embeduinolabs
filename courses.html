@@ -93,6 +93,31 @@ section{position:relative;z-index:1;}
 .soon-card .levels{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
 .soon-card .badge-soon-sm{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:1.5px;padding:3px 10px;border-radius:4px;border:1px dashed rgba(255,255,255,0.1);color:var(--dim);}
 
+
+/* ─── BATCH TABLE ─── */
+.batch-table { display:flex; flex-direction:column; gap:8px; margin-top:20px; }
+.batch-row {
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; padding:14px 18px;
+  background:rgba(255,255,255,0.025);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:10px; flex-wrap:wrap;
+}
+.batch-row:hover { background:rgba(255,255,255,0.04); }
+.batch-left { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.batch-num {
+  font-family:var(--mono); font-size:10px; letter-spacing:1.5px;
+  border:1px solid; border-radius:4px; padding:3px 10px;
+}
+.batch-status { font-family:var(--mono); font-size:12px; font-weight:700; }
+.batch-date { font-size:13px; color:var(--dim); }
+.batch-cta {
+  font-family:var(--mono); font-size:11px; font-weight:700;
+  letter-spacing:1px; padding:8px 18px; border-radius:6px;
+  text-decoration:none; white-space:nowrap; transition:opacity 0.2s, transform 0.15s;
+}
+.batch-cta:hover { opacity:0.85; transform:translateY(-1px); }
+
 /* instructor accordion */
 .instructor-accordion{margin-top:16px;border:1px solid var(--border2);border-radius:10px;overflow:hidden;}
 .instructor-toggle{width:100%;background:rgba(255,255,255,0.025);border:none;cursor:none;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;color:var(--text);font-family:var(--mono);font-size:12px;letter-spacing:1px;transition:background 0.2s;}
@@ -263,7 +288,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:48px 48
   <div class="page-hero reveal">
     <div class="section-tag-top">COURSE ROADMAP</div>
     <h1>Your Embedded <span class="accent">Journey</span></h1>
-    <p>Everything we're building, in sequence. One solid foundation before the next level. Phase 1 is enrolling now. Phase 2 starts July.</p>
+    <p>Everything we're building, in sequence. One solid foundation before the next level. Phase 1 is enrolling now.</p>
   </div>
 </section>
 
@@ -273,7 +298,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:48px 48
     <!-- PHASE 1 -->
     <div class="phase-label reveal">
       <div class="line" style="background:linear-gradient(90deg,transparent,rgba(0,229,160,0.25));"></div>
-      <span style="color:rgba(0,229,160,0.7);">PHASE 1 — ENROLLING NOW</span>
+      <span style="color:rgba(0,229,160,0.7);">ENROLLING NOW</span>
       <div class="line" style="background:linear-gradient(90deg,rgba(0,229,160,0.25),transparent);"></div>
     </div>
 
@@ -284,8 +309,8 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:48px 48
       <div class="course-full-header">
         <div class="course-full-info">
           <div class="course-badge-row">
-            <span class="badge-enroll" style="background:var(--blue);color:var(--bg);">● ENROLLING NOW</span>
-            <span style="font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--muted);">▶ STARTS 13 JUNE · 4 WEEKS · WEEKENDS · ONLINE</span>
+            <span class="badge-enroll" style="background:rgba(255,90,90,0.15);color:#ff7070;border:1px solid rgba(255,90,90,0.35);">✖ BATCH 1 FULL</span>
+            <span style="font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--muted);">▶ 4 WEEKS · WEEKENDS · ONLINE</span>
           </div>
           <h2>Embedded Systems &amp; IoT Bootcamp <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--blue);background:rgba(0,229,160,0.08);border:1px solid rgba(0,229,160,0.25);border-radius:4px;padding:3px 9px;letter-spacing:1px;">Fundamentals Track</span></h2>
           <p class="prereq">PRE-REQ: NONE — COMPLETE BEGINNER FRIENDLY</p>
@@ -320,6 +345,24 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:48px 48
         </div>
       </div>
       <div class="course-full-footer">
+      <div class="batch-table">
+        <div class="batch-row">
+          <div class="batch-left">
+            <span class="batch-num" style="color:var(--blue);border-color:rgba(74,158,255,0.4);background:rgba(74,158,255,0.08);">BATCH 1</span>
+            <span class="batch-status" style="color:#ff7070;">FULL</span>
+            <span class="batch-date">13 June 2026</span>
+          </div>
+          <span style="font-family:var(--mono);font-size:11px;color:var(--dim);padding:8px 18px;border-radius:6px;border:1px dashed rgba(255,255,255,0.1);">CLOSED</span>
+        </div>
+        <div class="batch-row">
+          <div class="batch-left">
+            <span class="batch-num" style="color:var(--blue);border-color:rgba(74,158,255,0.4);background:rgba(74,158,255,0.08);">BATCH 2</span>
+            <span class="batch-status" style="color:var(--green);">OPEN</span>
+            <span class="batch-date">11 July 2026 (Tentative)</span>
+          </div>
+          <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="batch-cta" style="background:var(--blue);color:var(--bg);">REGISTER →</a>
+        </div>
+      </div>
       <div class="instructor-accordion" id="acc-owais-1">
         <button class="instructor-toggle" onclick="toggleAcc('acc-owais-1')">
           <div class="toggle-left">
@@ -358,7 +401,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:48px 48
       <div class="course-full-header">
         <div class="course-full-info">
           <div class="course-badge-row">
-            <span class="badge-enroll" style="background:var(--green);color:var(--bg);">● ENROLLING NOW</span>
+            <span class="badge-enroll" style="background:var(--green);color:var(--bg);">● BATCH 1 OPEN</span>
             <span style="font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--muted);">▶ STARTS 13 JUNE · 4 WEEKS · WEEKENDS · ONLINE</span>
           </div>
           <h2>Professional PCB Design Bootcamp <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--green);background:rgba(0,229,160,0.08);border:1px solid rgba(0,229,160,0.25);border-radius:4px;padding:3px 9px;letter-spacing:1px;">Level 1</span></h2>
@@ -393,6 +436,24 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:48px 48
         </div>
       </div>
       <div class="course-full-footer">
+      <div class="batch-table">
+        <div class="batch-row">
+          <div class="batch-left">
+            <span class="batch-num" style="color:var(--green);border-color:rgba(0,229,160,0.4);background:rgba(0,229,160,0.07);">BATCH 1</span>
+            <span class="batch-status" style="color:var(--green);">SEATS AVAILABLE</span>
+            <span class="batch-date">13 June 2026</span>
+          </div>
+          <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="batch-cta" style="background:var(--green);color:var(--bg);">REGISTER →</a>
+        </div>
+        <div class="batch-row">
+          <div class="batch-left">
+            <span class="batch-num" style="color:var(--green);border-color:rgba(0,229,160,0.4);background:rgba(0,229,160,0.07);">BATCH 2</span>
+            <span class="batch-status" style="color:var(--green);">OPEN</span>
+            <span class="batch-date">11 July 2026 (Tentative)</span>
+          </div>
+          <a href="https://docs.google.com/forms/d/1Flcm8zHhwcUQbWOsdlLaiDBojNH8hl6wbdkQwR3EUpU/" target="_blank" class="batch-cta" style="background:var(--green);color:var(--bg);">REGISTER →</a>
+        </div>
+      </div>
       <div class="instructor-accordion" id="acc-hayyan-1">
         <button class="instructor-toggle" onclick="toggleAcc('acc-hayyan-1')">
           <div class="toggle-left">
@@ -424,7 +485,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:48px 48
     <!-- PHASE 2 -->
     <div class="phase-label reveal" style="margin-top:16px;">
       <div class="line" style="background:linear-gradient(90deg,transparent,rgba(0,229,160,0.18));"></div>
-      <span style="color:rgba(0,229,160,0.5);">PHASE 2 — STARTS JULY · JOIN WAITLIST</span>
+      <span style="color:rgba(0,229,160,0.5);">STARTING SOON — DATE TBD · JOIN WAITLIST</span>
       <div class="line" style="background:linear-gradient(90deg,rgba(0,229,160,0.18),transparent);"></div>
     </div>
 
@@ -435,7 +496,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:48px 48
       <div class="course-full-header">
         <div class="course-full-info">
           <div class="course-badge-row">
-            <span class="badge-enroll" style="background:rgba(74,158,255,0.15);color:var(--blue);border:1px solid rgba(74,158,255,0.3);">▶ STARTS JULY</span>
+            <span class="badge-enroll" style="background:rgba(74,158,255,0.08);color:var(--blue);border:1px solid rgba(74,158,255,0.2);">◌ DATE TBD</span>
           </div>
           <h2>STM32 Embedded Systems Development <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--blue);background:rgba(74,158,255,0.1);border:1px solid rgba(74,158,255,0.3);border-radius:4px;padding:3px 9px;letter-spacing:1px;">Level 1</span></h2>
           <p class="prereq">PRE-REQ: EMBEDDED SYSTEMS &amp; IoT BOOTCAMP (OR EQUIVALENT ARDUINO/C EXPERIENCE)</p>
@@ -479,7 +540,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:48px 48
         </div>
       </div>
       <div class="course-full-footer" style="margin-top:16px;">
-        <span style="font-size:13px;color:var(--dim);font-family:var(--mono);">Fee announced at launch</span>
+        <span style="font-size:13px;color:var(--dim);font-family:var(--mono);">Date TBD · Fee announced at launch</span>
         <a href="https://docs.google.com/forms/d/1rU8_jEswz7tQQXnoqoOomgpeQsHD6aAXrk7GUtZ8Qbo/" target="_blank" class="btn-waitlist" style="background:rgba(74,158,255,0.12);color:var(--blue);border:1px solid rgba(74,158,255,0.35);">JOIN WAITLIST →</a>
       </div>
       </div>
@@ -492,7 +553,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:48px 48
       <div class="course-full-header">
         <div class="course-full-info">
           <div class="course-badge-row">
-            <span class="badge-enroll" style="background:rgba(0,229,160,0.1);color:var(--green);border:1px solid rgba(0,229,160,0.25);">▶ STARTS JULY</span>
+            <span class="badge-enroll" style="background:rgba(0,229,160,0.06);color:var(--green);border:1px solid rgba(0,229,160,0.18);">◌ DATE TBD</span>
           </div>
           <h2>Professional PCB Design Bootcamp <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--green);background:rgba(0,229,160,0.08);border:1px solid rgba(0,229,160,0.22);border-radius:4px;padding:3px 9px;letter-spacing:1px;">Level 2</span></h2>
           <p class="prereq">PRE-REQ: PCB DESIGN BOOTCAMP L1</p>
@@ -540,7 +601,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border2);padding:48px 48
         </div>
       </div>
       <div class="course-full-footer" style="margin-top:16px;">
-        <span style="font-size:13px;color:var(--dim);font-family:var(--mono);">Fee announced at launch</span>
+        <span style="font-size:13px;color:var(--dim);font-family:var(--mono);">Date TBD · Fee announced at launch</span>
         <a href="https://docs.google.com/forms/d/1rU8_jEswz7tQQXnoqoOomgpeQsHD6aAXrk7GUtZ8Qbo/" target="_blank" class="btn-waitlist" style="background:rgba(0,229,160,0.08);color:var(--green);border:1px solid rgba(0,229,160,0.3);">JOIN WAITLIST →</a>
       </div>
       </div>
