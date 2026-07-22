@@ -618,15 +618,24 @@ async function fetchCert(credId) {
 
 /* ── Generate a signed URL for a private-bucket PDF (60 min expiry) ── */
 async function getSignedUrl(pdfPath) {
-  const url  = `${SUPABASE_URL}/storage/v1/object/sign/${BUCKET}/${pdfPath}`;
-  const res  = await fetch(url, {
+  // pdfPath is just the filename e.g. "EL-PCBL1-26B1-001.pdf"
+  // Supabase sign endpoint: POST /storage/v1/object/sign/{bucket}/{path}
+  const endpoint = `${SUPABASE_URL}/storage/v1/object/sign/${BUCKET}/${pdfPath}`;
+  const res = await fetch(endpoint, {
     method:  'POST',
     headers: SUPABASE_HEADERS,
     body:    JSON.stringify({ expiresIn: 3600 }),
   });
-  if (!res.ok) throw new Error('signed URL error ' + res.status);
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error('signed URL error ' + res.status + ': ' + err);
+  }
   const data = await res.json();
-  return SUPABASE_URL + data.signedURL;
+  // data.signedURL is a relative path like /storage/v1/object/sign/...?token=...
+  // Prepend the Supabase project URL to make it absolute
+  if (data.signedURL) return SUPABASE_URL + data.signedURL;
+  if (data.signedUrl) return data.signedUrl; // some versions return camelCase
+  throw new Error('No signed URL in response: ' + JSON.stringify(data));
 }
 
 /* ── Main verify function ── */
@@ -678,7 +687,7 @@ async function verifyCred() {
     const pdfAvailable = cert.pdf_available === true || cert.pdf_available === 'true' || cert.pdf_available === 't';
     if (pdfAvailable && cert.pdf_path) {
       try { signedUrl = await getSignedUrl(cert.pdf_path); }
-      catch(e) { signedUrl = null; }
+      catch(e) { console.warn('PDF signed URL failed:', e.message); signedUrl = null; }
     }
 
     const courseCode  = raw.split('-')[1];
@@ -789,7 +798,7 @@ document.getElementById('credInput').addEventListener('input', function(e) {
   let val = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
   if (val.length > 2)  val = val.slice(0,2)  + '-' + val.slice(2);
   if (val.length > 8)  val = val.slice(0,8)  + '-' + val.slice(8);
-  if (val.length > 13) val = val.slice(0,13) + '-' + val.slice(13);
+  if (val.length > 11) val = val.slice(0,11) + '-' + val.slice(11);
   e.target.value = val;
 });
 
