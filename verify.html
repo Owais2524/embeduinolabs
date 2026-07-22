@@ -631,9 +631,11 @@ async function getSignedUrl(pdfPath) {
     throw new Error('signed URL error ' + res.status + ': ' + err);
   }
   const data = await res.json();
+  console.log(data);
   // data.signedURL is a relative path like /storage/v1/object/sign/...?token=...
   // Prepend the Supabase project URL to make it absolute
-  if (data.signedURL) return SUPABASE_URL + data.signedURL;
+  if (data.signedURL) {     return `${SUPABASE_URL}/storage/v1${data.signedURL}`; }  
+  if (data.signedUrl) {     return `${SUPABASE_URL}/storage/v1${data.signedUrl}`; }
   if (data.signedUrl) return data.signedUrl; // some versions return camelCase
   throw new Error('No signed URL in response: ' + JSON.stringify(data));
 }
