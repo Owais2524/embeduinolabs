@@ -618,28 +618,33 @@ async function fetchCert(credId) {
 
 /* ── Generate a signed URL for a private-bucket PDF (60 min expiry) ── */
 async function getSignedUrl(pdfPath) {
-  // pdfPath is just the filename e.g. "EL-PCBL1-26B1-001.pdf"
-  // Supabase sign endpoint: POST /storage/v1/object/sign/{bucket}/{path}
   const endpoint = `${SUPABASE_URL}/storage/v1/object/sign/${BUCKET}/${pdfPath}`;
+
   const res = await fetch(endpoint, {
-    method:  'POST',
+    method: 'POST',
     headers: SUPABASE_HEADERS,
-    body:    JSON.stringify({ expiresIn: 3600 }),
+    body: JSON.stringify({ expiresIn: 3600 }),
   });
+
   if (!res.ok) {
     const err = await res.text();
-    throw new Error('signed URL error ' + res.status + ': ' + err);
+    throw new Error(`signed URL error ${res.status}: ${err}`);
   }
+
   const data = await res.json();
   console.log(data);
-  // data.signedURL is a relative path like /storage/v1/object/sign/...?token=...
-  // Prepend the Supabase project URL to make it absolute
-  if (data.signedURL) {     return `${SUPABASE_URL}/storage/v1${data.signedURL}`; }  
-  if (data.signedUrl) {     return `${SUPABASE_URL}/storage/v1${data.signedUrl}`; }
-  if (data.signedUrl) return data.signedUrl; // some versions return camelCase
-  throw new Error('No signed URL in response: ' + JSON.stringify(data));
-}
 
+  if (data.signedURL) {
+    return `${SUPABASE_URL}/storage/v1${data.signedURL}`;
+  }
+
+  if (data.signedUrl) {
+    return `${SUPABASE_URL}/storage/v1${data.signedUrl}`;
+  }
+
+  throw new Error('No signed URL returned');
+}
+  
 /* ── Main verify function ── */
 async function verifyCred() {
   const raw      = document.getElementById('credInput').value.trim().toUpperCase();
