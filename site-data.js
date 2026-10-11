@@ -22,6 +22,13 @@ window.SITE={
       topics:["Multi-layer stackups and high-speed design","Signal integrity and impedance control","Power integrity and decoupling","DFM and high-density layout"]}
   },
   soon:[{name:"ESP32 and Advanced IoT",level:"Level 1",desc:"FreeRTOS, WiFi, BLE and OTA updates."},{name:"STM32 Embedded Systems",level:"Level 2",desc:"FreeRTOS and industrial firmware."},{name:"ESP32 and IIoT",level:"Level 2",desc:"MQTT, Node-RED and cloud pipelines."},{name:"nRF52 and Bluetooth Low Energy",level:"",desc:"GATT, bonding and mesh networking."}],
+  /* PROJECTS shown on the engineering page. Leave the list empty to hide the section.
+     Example: {title:"Project name",category:"Embedded, IoT",summary:"What was built and the result.",tags:["STM32","LoRa"],image:"img/project1.jpg"}
+     Only list work the client has agreed to share (image is optional). */
+  projects:[],
+  /* REVIEWS shown on the training page. Leave empty to hide the section. Only add reviews with the student's permission.
+     Example: {name:"Student name",course:"Embedded Systems and IoT Bootcamp, Batch 2",text:"What they said."} */
+  reviews:[],
   instructors:{
     owais:{name:"Muhammad Owais",bio:"5+ years building firmware across IoT, automation and robotics, from local startups to international clients. Former lab engineer at one of Pakistan's top engineering universities and NAVTTC Mechatronics and Robotics assistant instructor.",linkedin:"https://www.linkedin.com/in/muhammad-owais07/"},
     hayyan:{name:"Muhammad Hayyan",bio:"7+ years designing reliable, high-integrity PCBs for industrial and consumer applications. Former lab engineer at one of Pakistan's top engineering universities, focused on signal integrity and design for manufacturability.",linkedin:"https://www.linkedin.com/in/mhayyan/"}}
