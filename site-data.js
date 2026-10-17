@@ -22,6 +22,233 @@ window.SITE={
       topics:["Multi-layer stackups and high-speed design","Signal integrity and impedance control","Power integrity and decoupling","DFM and high-density layout"]}
   },
   soon:[{name:"ESP32 and Advanced IoT",level:"Level 1",desc:"FreeRTOS, WiFi, BLE and OTA updates."},{name:"STM32 Embedded Systems",level:"Level 2",desc:"FreeRTOS and industrial firmware."},{name:"ESP32 and IIoT",level:"Level 2",desc:"MQTT, Node-RED and cloud pipelines."},{name:"nRF52 and Bluetooth Low Energy",level:"",desc:"GATT, bonding and mesh networking."}],
+  /* TECHNOLOGY on the engineering page. core = always visible, more = behind the "more" toggle. Only list what you would take client work in. */
+  stack:[
+ {
+  "group": "Microcontrollers and chips",
+  "core": [
+   "STM32",
+   "ESP32",
+   "nRF52",
+   "Arduino",
+   "Raspberry Pi Pico"
+  ],
+  "more": [
+   "STM32 F0, F1, F4, L4, G0, H7, WB, WL",
+   "ESP32-S3, C3, C6",
+   "RP2040, RP2350",
+   "nRF53, nRF91",
+   "Teensy",
+   "Microchip PIC, AVR, SAM",
+   "TI MSP430, C2000",
+   "NXP LPC, i.MX RT",
+   "Renesas RA",
+   "Silicon Labs EFR32"
+  ]
+ },
+ {
+  "group": "Single-board computers and Linux",
+  "core": [
+   "Raspberry Pi",
+   "NVIDIA Jetson",
+   "Embedded Linux"
+  ],
+  "more": [
+   "BeagleBone",
+   "Orange Pi",
+   "Yocto",
+   "Buildroot"
+  ]
+ },
+ {
+  "group": "Firmware and frameworks",
+  "core": [
+   "Bare metal C and C++",
+   "FreeRTOS",
+   "ESP-IDF",
+   "STM32Cube and HAL",
+   "PlatformIO",
+   "OTA updates"
+  ],
+  "more": [
+   "Zephyr",
+   "Mbed OS",
+   "MicroPython",
+   "CircuitPython",
+   "Rust (embedded)",
+   "MCUboot bootloaders"
+  ]
+ },
+ {
+  "group": "Wired protocols",
+  "core": [
+   "UART",
+   "I²C",
+   "SPI",
+   "CAN",
+   "RS-485 and Modbus RTU",
+   "USB"
+  ],
+  "more": [
+   "CAN FD",
+   "I²S",
+   "1-Wire",
+   "Ethernet"
+  ]
+ },
+ {
+  "group": "Wireless",
+  "core": [
+   "WiFi",
+   "BLE",
+   "LoRa",
+   "LoRaWAN",
+   "GSM and LTE-M"
+  ],
+  "more": [
+   "Zigbee",
+   "Thread and Matter",
+   "ESP-NOW",
+   "NB-IoT",
+   "GPS and GNSS",
+   "NFC and RFID",
+   "UWB"
+  ]
+ },
+ {
+  "group": "Protocols, cloud and dashboards",
+  "core": [
+   "MQTT",
+   "HTTP and REST",
+   "Node-RED",
+   "ThingsBoard",
+   "Firebase"
+  ],
+  "more": [
+   "CoAP",
+   "WebSocket",
+   "Modbus TCP",
+   "OPC UA",
+   "AWS IoT",
+   "Azure IoT",
+   "Grafana and InfluxDB",
+   "Home Assistant",
+   "The Things Network"
+  ]
+ },
+ {
+  "group": "Sensors",
+  "core": [
+   "Motion (IMU, encoders)",
+   "Environmental",
+   "Current sensing",
+   "Distance and ToF",
+   "Load cells",
+   "Cameras"
+  ],
+  "more": [
+   "Hall effect",
+   "Temperature and humidity",
+   "Gas and air quality",
+   "Soil moisture",
+   "Thermocouples",
+   "Presence detection",
+   "LiDAR"
+  ]
+ },
+ {
+  "group": "Actuators and displays",
+  "core": [
+   "DC, BLDC and stepper motors",
+   "Servos",
+   "Motor drivers",
+   "Relays and SSRs",
+   "OLED and TFT displays"
+  ],
+  "more": [
+   "ESCs",
+   "Solenoids",
+   "Pumps",
+   "E-paper displays"
+  ]
+ },
+ {
+  "group": "Power",
+  "core": [
+   "Buck and boost regulation",
+   "LiPo charging",
+   "BMS"
+  ],
+  "more": [
+   "Solar and MPPT",
+   "USB-PD"
+  ]
+ },
+ {
+  "group": "Robotics and control",
+  "core": [
+   "PID control",
+   "Motor control (FOC)",
+   "ROS 2"
+  ],
+  "more": [
+   "ROS",
+   "micro-ROS",
+   "Kinematics",
+   "Sensor fusion (Kalman)",
+   "SLAM and autonomous navigation",
+   "Gazebo"
+  ]
+ },
+ {
+  "group": "Vision and edge AI",
+  "core": [
+   "OpenCV",
+   "TensorFlow Lite Micro",
+   "Edge Impulse",
+   "ESP32-CAM"
+  ],
+  "more": [
+   "TinyML",
+   "YOLO on Jetson and Raspberry Pi",
+   "OpenMV",
+   "MediaPipe"
+  ]
+ },
+ {
+  "group": "Design tools",
+  "core": [
+   "KiCad",
+   "EasyEDA",
+   "Fusion 360",
+   "LTspice"
+  ],
+  "more": [
+   "Altium",
+   "Eagle",
+   "SolidWorks",
+   "FreeCAD",
+   "Cura",
+   "PrusaSlicer",
+   "Proteus"
+  ]
+ },
+ {
+  "group": "Development and testing",
+  "core": [
+   "Git",
+   "ST-Link and J-Link",
+   "SWD and JTAG",
+   "Logic analyzer",
+   "Oscilloscope"
+  ],
+  "more": [
+   "CI",
+   "Unit testing (Ceedling, Unity)",
+   "Hardware-in-the-loop"
+  ]
+ }
+],
   /* PROJECTS shown on the engineering page. Leave the list empty to hide the section.
      Example: {title:"Project name",category:"Embedded, IoT",summary:"What was built and the result.",tags:["STM32","LoRa"],image:"img/project1.jpg"}
      Only list work the client has agreed to share (image is optional). */
